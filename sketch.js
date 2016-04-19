@@ -5,6 +5,7 @@ function preload(){
 number = loadAnimation('assets/Number00.png','assets/Number07.png');
 
 }
+
 function setup() {
   createCanvas(600,600);
 }
