@@ -3,7 +3,13 @@ var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Snowfall in inches in Boston in January from 2010-2016";
 
-var input1, input2, button, results, error = "test error";
+
+var input1, 
+  input2, 
+  button,  //maybe more specific name?
+  results, 
+  error = "test error";
+
 
 // Snowfall in inches in Boston, MA on each day in January over the included years (2010-2016)
 function setup() {
