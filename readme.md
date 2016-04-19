@@ -1,9 +1,3 @@
-Edit this with your description of your final project.
+My final contrasts the google searches for David Bowie and Michael Jackson from a few days before their deaths to a couple weeks after.
 
-Your final project must:
-- Be organized in an object oriented way meaning that you utilize constructor functions as well as organizing your functions.
-- Two objects made from classes you define must interact with one another
-- Correct use of loops (no prevalent similarly repeated operations)
-
-
-Due on April 29, 2016 **no late work will be accepted.**
+I still need to make the changes you left on the other version, but I wanted to focus on getting a second element on the screen this week. 
