@@ -2,7 +2,7 @@ var number;
 
 function preload(){
 
-number = loadAnimation('assets/Number00.png','assets/Number07.png');
+number = loadAnimation("assets/Number00.png","assets/Number07.png");
 
 }
 
