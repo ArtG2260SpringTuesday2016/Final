@@ -1,1 +1,1 @@
-Edit this with your description of your final project.
+My idea is to decorate a pizza.  There will be a side bar of different toppings, and when you click on one of the toppings, you are able to add to that array, for example pepporoni to the pepporoni array.  I dont know how easy it is to have a few different arrays and move between adding this to them. Is this something I could do?
