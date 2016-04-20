@@ -1,47 +1,34 @@
-var buttonP;
-var pepperonis = [];
-var xPos = 250;
-var yPos = 200;
-var lilR = 200;
-var bigR = 250
-
 this.distanceToMouse= function(){
   return dist(mouseX, mouseY, 150, 200);
 }
+var pepperonis = [];
 
 function setup() {
   createCanvas(500,500)
    background("white");
-  
   for (var i=0; i < 100; i++)
   pepperonis[i] = new Pepperoni();
+}
 
+function mousePressed(){
+  if (dist(mouseX,mouseY,150,200)< 90){
+  pepperonis.push(new Pepperoni(mouseX,mouseY));
+}
 }
 
 function draw() {
  
   noStroke();
   fill("#dba24a");
-  ellipse(xPos,yPos,bigR,bigR);
+  ellipse(150,200,250,250);
   fill("#FFD700");
-  ellipse(xPos,yPos,lilR,lilR);
-
-if (mouseIsPressed) {
-  if (mouseButton == LEFT)
-      if (mouseIsPressed && (dist(mouseX,mouseY,xPos,yPos)< (lilR/2)-10)){
-      pepperonis.push(new Pepperoni(mouseX,mouseY));
-      }
-    if (mouseButton == RIGHT)
-    fill('black')
-      rect(10,10,10,10);
-}
-}
+  ellipse(150,200,200,200);
 
 
  for (var i=0; i < pepperonis.length; i++){
  pepperonis[i].display();
  }
-
+}
 
 function Pepperoni(x,y){
   this.x = x;
@@ -53,5 +40,13 @@ function Pepperoni(x,y){
     ellipse(this.x,this.y, 20,20)
   }
 }
-
-//newcommit
+/*
+Pizza(){
+ var x= 150;
+ var y=200;
+  ellipse(x,y,250,250);
+  ellipse(x,y,200,200);
+ 
+  
+}
+*/
