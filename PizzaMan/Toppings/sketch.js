@@ -1,19 +1,23 @@
 var toppings = [];
-var CurrentTopping;
+//var CurrentTopping;
 var WholePizza;
 
 function setup(){
   createCanvas(500,500);
-  CurrentTopping = new Topping();
+//  CurrentTopping = new Topping();
   WholePizza = new Pizza();
-  ToppingX = mouseX;
-  ToppingY = mouseY;
+  
+  for (var i=0; i < 100; i++)
+    toppings[i] = new Topping
+ 
 
 }
 
 function draw(){
   background("white");
-  
+  ToppingX = mouseX;
+  ToppingY = mouseY;
+
   noStroke();
   fill('#ECDC98')
   triangle(20,30,0,40,20, 50);
@@ -27,26 +31,28 @@ function draw(){
   ellipse(60,50,15,15)
   ellipse(55,49,26,13)
   rect(49,50,12,15)
-  
-  WholePizza.renderPizza(150,200);
-  CurrentTopping.renderPepperoni();
-  CurrentTopping.renderMushroom();
-  CurrentTopping.renderPineapple();
 
+
+WholePizza.renderPizza(150,200);
+
+ for (var i=0; i < toppings.length; i++){
+  toppings[i].renderPepperoni();
+  toppings[i].renderMushroom();
+  toppings[i].renderPineapple();
+  }
 }
 
-  
 function Topping(ToppingX,ToppingY){
   this.x = ToppingX;
   this.y = ToppingY;
   
-this.renderPepperoni = function(ToppingX,ToppingY){  //pepperoni
+  this.renderPepperoni = function(ToppingX,ToppingY){  //pepperoni
       noStroke();
       fill("#E34234");
       ellipse(ToppingX,ToppingY,20,20)
   }
 
-this.renderMushroom = function(ToppingX, ToppingY){ //mushroom
+  this.renderMushroom = function(ToppingX, ToppingY){ //mushroom
     fill("#E9C2A6");
     ellipse(ToppingX+1,ToppingY+1,15,15)
     ellipse(ToppingX+11,ToppingY+1,15,15)
@@ -54,7 +60,7 @@ this.renderMushroom = function(ToppingX, ToppingY){ //mushroom
     rect(ToppingX,ToppingY+1,12,15)
   }
 
-this.renderPineapple= function(ToppingX,ToppingY){ //pineapple
+  this.renderPineapple= function(ToppingX,ToppingY){ //pineapple
       fill('#ECDC98')
       noStroke();
       triangle(ToppingX+20, ToppingY ,ToppingX, ToppingY+10, ToppingX+20, ToppingY+20);
@@ -73,9 +79,9 @@ function Pizza(PizzaX,PizzaY){
   ellipse(PizzaX,PizzaY,200,200);
   
   
-function mousePressed(){
- if (dist(ToppingX,ToppingY,PizzaX, PizzaY)< 90){
-  toppings.push(new Topping(ToppingX,ToppingY));
+  function mousePressed(ToppingX,ToppingY){
+    if (dist(ToppingX,ToppingY,PizzaX, PizzaY)< 90){
+    toppings.push(new Topping(ToppingX,ToppingY));
     }
   }
 }
