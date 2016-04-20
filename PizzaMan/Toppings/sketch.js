@@ -8,7 +8,6 @@ function setup(){
 
 function draw(){
   background("white");
-  CurrentTopping.display();
   
   noStroke();
   fill('#ECDC98')
@@ -23,19 +22,23 @@ function draw(){
   ellipse(60,50,15,15)
   ellipse(55,49,26,13)
   rect(49,50,12,15)
+  
+  CurrentTopping.renderPepperoni();
+  CurrentTopping.renderMushroom();
+  CurrentTopping.renderPineapple();
 }
 
 function Toppings(x,y){
-  this.x = x;
-  this.y = y;
+  this.x = 10;
+  this.y = 10;
   
-this.display = function (){  //pepperoni
+this.renderPepperoni = function(x,y){  //pepperoni
       noStroke();
       fill("#E34234");
       ellipse(x,y,20,20)
   }
 
-this.display = function(){ //mushroom
+this.renderMushroom = function(x,y){ //mushroom
     fill("#E9C2A6");
     ellipse(x+1,y+1,15,15)
     ellipse(x+11,y+1,15,15)
@@ -43,7 +46,7 @@ this.display = function(){ //mushroom
     rect(x,y+1,12,15)
   }
 
-this.display= function(){ //pineapple
+this.renderPineapple= function(x,y){ //pineapple
       fill('#ECDC98')
       noStroke();
       triangle(x+20, y ,x, y+10, x+20, y+20);
