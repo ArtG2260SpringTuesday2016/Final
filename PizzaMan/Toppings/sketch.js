@@ -29,13 +29,13 @@ function Toppings(x,y){
   this.x = x;
   this.y = y;
   
-var Pepperoni = this.display = function (){  //pepperoni
+this.display = function (){  //pepperoni
       noStroke();
       fill("#E34234");
       ellipse(x,y,20,20)
   }
 
-var Mushroom = this.display = function(){ //mushroom
+this.display = function(){ //mushroom
     fill("#E9C2A6");
     ellipse(x+1,y+1,15,15)
     ellipse(x+11,y+1,15,15)
@@ -43,7 +43,7 @@ var Mushroom = this.display = function(){ //mushroom
     rect(x,y+1,12,15)
   }
 
-var Pineapple = this.display= function(){ //pineapple
+this.display= function(){ //pineapple
       fill('#ECDC98')
       noStroke();
       triangle(x+20, y ,x, y+10, x+20, y+20);
