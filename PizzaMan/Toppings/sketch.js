@@ -3,7 +3,7 @@ var CurrentTopping;
 
 function setup(){
   createCanvas(500,500);
-  CurrentTopping = new Toppings;
+  CurrentTopping = new Toppings();
 }
 
 function draw(){
@@ -24,17 +24,18 @@ function draw(){
   ellipse(55,49,26,13)
   rect(49,50,12,15)
 }
+
 function Toppings(x,y){
   this.x = x;
   this.y = y;
   
-this.display = function (){  //pepperoni
+var Pepperoni = this.display = function (){  //pepperoni
       noStroke();
       fill("#E34234");
       ellipse(x,y,20,20)
   }
 
-this.display = function(){ //mushroom
+var Mushroom = this.display = function(){ //mushroom
     fill("#E9C2A6");
     ellipse(x+1,y+1,15,15)
     ellipse(x+11,y+1,15,15)
@@ -42,7 +43,7 @@ this.display = function(){ //mushroom
     rect(x,y+1,12,15)
   }
 
-this.display= function(){ //pineapple
+var Pineapple = this.display= function(){ //pineapple
       fill('#ECDC98')
       noStroke();
       triangle(x+20, y ,x, y+10, x+20, y+20);
