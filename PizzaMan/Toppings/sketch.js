@@ -5,30 +5,36 @@ function setup(){
 function Pepperoni(x, y){
     this.x = x;
     this.y = y;
-    noStroke();
-    fill("#E34234");
-    ellipse(x,y,20,20)
+    
+    this.display = function(){
+      noStroke();
+      fill("#E34234");
+      ellipse(x,y,20,20)
+  }
 }
 
 function Mushroom(x,y){
   this.x = x;
   this.y = y;
-  fill("#E9C2A6");
-  ellipse(x+1,y+1,15,15)
-  ellipse(x+11,y+1,15,15)
-  ellipse(x+6,y,26,13)
-  rect(x,y+1,12,15)
-  fill("black");
+  
+  this.display = function(){
+    fill("#E9C2A6");
+    ellipse(x+1,y+1,15,15)
+    ellipse(x+11,y+1,15,15)
+    ellipse(x+6,y,26,13)
+    rect(x,y+1,12,15)
+  }
 }
 
 function Pinapple(x,y){
     this.x = x;
     this.y = y;
-    fill('#ECDC98')
-    noStroke();
-    triangle(x+20, y ,x, y+10, x+20, y+20);
-  
     
+    this.display= function(){
+      fill('#ECDC98')
+      noStroke();
+      triangle(x+20, y ,x, y+10, x+20, y+20);
+  }    
 }
 
 function draw(){
