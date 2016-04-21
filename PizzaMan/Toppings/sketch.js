@@ -38,12 +38,39 @@ function draw(){
 
   WholePizza.renderPizza(150,200);
 
+check = collidePointRect(mouseX,mouseY,375,50,60,60);
+	if(check){ //change color!
+    fill("red")
+      w = "weird";
+
+      
+rect(375,50,60,60);
+
 for (var i=0; i < toppings.length; i++){
-  toppings[i].renderPepperoni();
-    } 
+  if (w = "weird"){
+      toppings[i].renderPepperoni();
+  }
+}
+}
+check = collidePointRect(mouseX,mouseY,375,150,60,60);
+	if(check){ //change color!
+    fill("red")
+      w = "wow";
+
+      
+rect(375,150,60,60);
+
+for (var i=0; i < toppings.length; i++){
+  if (w = "wow"){
+      toppings[i].renderMushroom();
+  }
+  }
+}
+}
+    
   //toppings[i].renderMushroom();
   //toppings[i].renderPineapple();
-}
+
 
 
 
