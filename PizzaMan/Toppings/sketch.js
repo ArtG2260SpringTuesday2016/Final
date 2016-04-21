@@ -2,6 +2,7 @@ var CurrentTopping;
 var toppings = [];
 var roni = [];
 var shroom = [];
+var olive = [];
 var WholePizza;
 toppings.push(roni,shroom);
 
@@ -18,6 +19,8 @@ function draw(){
   roniY = mouseY;
   shroomX = mouseX;
   shroomY = mouseY;
+  oliveX = mouseX;
+  oliveY = mouseY;
   
 
 
@@ -59,8 +62,21 @@ check = collidePointRect(shroomX,shroomY,375,150,60,60);
   fill("#ccb2ff")
 }
 rect(375,150,60,60);
-  
 
+
+check = collidePointRect(oliveX,oliveY,375,250,60,60);
+	if(check){ //change color!
+
+    fill('black');
+	  for (var q=0; q < olive.length; q++){
+      olive[q].renderOlive();
+}
+}else {
+  fill("#ccb2ff")
+}
+noStroke();
+rect(375,250,60,60);
+  
 }
 
 
@@ -69,10 +85,11 @@ function mousePressed(){
         roni.push(new Topping(roniX,roniY));
         } if (dist(shroomX, shroomY, PizzaX, PizzaY) < 90){
         shroom.push(new Topping(shroomX,shroomY));
+        } if (dist(oliveX, oliveY, PizzaX, PizzaY) < 90){
+        olive.push(new Topping(oliveX,oliveY));
+        }
+
 }
-      }
-
-
 
 function Topping(x,y){
   this.x = x;
@@ -92,9 +109,11 @@ function Topping(x,y){
     rect(this.x,this.y+1,12,15)
   }
 
-  this.renderPineapple= function(ToppingX,ToppingY){ //pineapple
-      fill('#ECDC98')
-      triangle(ToppingX+20, ToppingY ,ToppingX, ToppingY+10, ToppingX+20, ToppingY+20);
+  this.renderOlive= function(oliveX,oliveY){ //pineapple
+      noFill();
+      stroke('black');
+      strokeWeight(4);
+      ellipse(this.x,this.y,10,10);
   }    
 }
 
