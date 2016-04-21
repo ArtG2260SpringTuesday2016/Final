@@ -1,3 +1,4 @@
+var CurrentTopping;
 var toppings = [];
 var WholePizza;
 
@@ -7,17 +8,7 @@ function setup(){
   WholePizza = new Pizza();
 }
 
-function mousePressed(){
-      if (dist(mouseX, mouseY, PizzaX, PizzaY) < 90){
-      toppings.push(new Topping(mouseX,mouseY));
-  }
-}
-
-
 function draw(){
-
-  RoniX = this.x;
-  RoniY = this.y;
   PizzaX = 150;
   PizzaY = 200;
 
@@ -36,43 +27,41 @@ function draw(){
   ellipse(55,49,26,13)
   rect(49,50,12,15)
 
-  WholePizza.renderPizza(150,200);
+
 
 check = collidePointRect(mouseX,mouseY,375,50,60,60);
 	if(check){ //change color!
-    fill("red")
-      w = "weird";
-
-      
+    fill("#E34234")
+	  for (var i=0; i < toppings.length; i++){
+      toppings[i].renderPepperoni();
+	  }
+	  }else {
+	   fill("black")
+	  
+	
+}
 rect(375,50,60,60);
 
-for (var i=0; i < toppings.length; i++){
-  if (w = "weird"){
-      toppings[i].renderPepperoni();
-  }
-}
-}
+
 check = collidePointRect(mouseX,mouseY,375,150,60,60);
 	if(check){ //change color!
-    fill("red")
-      w = "wow";
-
-      
-rect(375,150,60,60);
-
-for (var i=0; i < toppings.length; i++){
-  if (w = "wow"){
+    fill("#E9C2A6")
+	  for (var i=0; i < toppings.length; i++){
       toppings[i].renderMushroom();
-  }
-  }
 }
+}else {
+  fill("black")
+  
 }
-    
-  //toppings[i].renderMushroom();
-  //toppings[i].renderPineapple();
+rect(375,150,60,60);
+    }
 
 
-
+function mousePressed(){
+      if (dist(mouseX, mouseY, PizzaX, PizzaY) < 90){
+      toppings.push(new Topping(mouseX,mouseY));
+      }
+}
 
 function Topping(x,y){
   this.x = x;
@@ -84,12 +73,12 @@ function Topping(x,y){
       ellipse(this.x,this.y,20,20)
   }
 
-  this.renderMushroom = function(ToppingX, ToppingY){ //mushroom
+  this.renderMushroom = function(){ //mushroom
     fill("#E9C2A6");
-    ellipse(ToppingX+1,ToppingY+1,15,15)
-    ellipse(ToppingX+11,ToppingY+1,15,15)
-    ellipse(ToppingX+6,ToppingY,26,13)
-    rect(ToppingX,ToppingY+1,12,15)
+    ellipse(this.x+1,this.y+1,15,15)
+    ellipse(this.x+11,this.y+1,15,15)
+    ellipse(this.x+6,this.y,26,13)
+    rect(this.x,this.y+1,12,15)
   }
 
   this.renderPineapple= function(ToppingX,ToppingY){ //pineapple
@@ -108,6 +97,8 @@ function Pizza(PizzaX,PizzaY){
   ellipse(PizzaX,PizzaY,250,250);
   fill("#FFD700");
   ellipse(PizzaX,PizzaY,200,200);
+  
+  WholePizza.renderPizza(150,200);
     }
   }
 
