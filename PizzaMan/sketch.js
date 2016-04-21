@@ -1,13 +1,10 @@
-this.distanceToMouse= function(){
-  return dist(mouseX, mouseY, 150, 200);
-}
 var pepperonis = [];
 
 function setup() {
   createCanvas(500,500)
    background("white");
-  for (var i=0; i < 100; i++)
-  pepperonis[i] = new Pepperoni();
+ // for (var i=0; i < 100; i++)
+ // pepperonis[i] = new Pepperoni();
 }
 
 function mousePressed(){

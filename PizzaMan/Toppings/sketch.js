@@ -1,22 +1,26 @@
 var toppings = [];
-//var CurrentTopping;
 var WholePizza;
 
 function setup(){
   createCanvas(500,500);
-//  CurrentTopping = new Topping();
+  background("white");
   WholePizza = new Pizza();
-  
-  for (var i=0; i < 100; i++)
-    toppings[i] = new Topping
- 
-
 }
 
+function mousePressed(){
+      if (dist(mouseX, mouseY, PizzaX, PizzaY) < 90){
+      toppings.push(new Topping(mouseX,mouseY));
+  }
+}
+
+
 function draw(){
-  background("white");
-  ToppingX = mouseX;
-  ToppingY = mouseY;
+
+  RoniX = this.x;
+  RoniY = this.y;
+  PizzaX = 150;
+  PizzaY = 200;
+
 
   noStroke();
   fill('#ECDC98')
@@ -32,24 +36,25 @@ function draw(){
   ellipse(55,49,26,13)
   rect(49,50,12,15)
 
+  WholePizza.renderPizza(150,200);
 
-WholePizza.renderPizza(150,200);
-
- for (var i=0; i < toppings.length; i++){
+for (var i=0; i < toppings.length; i++){
   toppings[i].renderPepperoni();
-  toppings[i].renderMushroom();
-  toppings[i].renderPineapple();
-  }
+    } 
+  //toppings[i].renderMushroom();
+  //toppings[i].renderPineapple();
 }
 
-function Topping(ToppingX,ToppingY){
-  this.x = ToppingX;
-  this.y = ToppingY;
-  
-  this.renderPepperoni = function(ToppingX,ToppingY){  //pepperoni
+
+
+function Topping(x,y){
+  this.x = x;
+  this.y = y;
+
+  this.renderPepperoni = function(){  //pepperoni
       noStroke();
       fill("#E34234");
-      ellipse(ToppingX,ToppingY,20,20)
+      ellipse(this.x,this.y,20,20)
   }
 
   this.renderMushroom = function(ToppingX, ToppingY){ //mushroom
@@ -62,7 +67,6 @@ function Topping(ToppingX,ToppingY){
 
   this.renderPineapple= function(ToppingX,ToppingY){ //pineapple
       fill('#ECDC98')
-      noStroke();
       triangle(ToppingX+20, ToppingY ,ToppingX, ToppingY+10, ToppingX+20, ToppingY+20);
   }    
 }
@@ -77,13 +81,7 @@ function Pizza(PizzaX,PizzaY){
   ellipse(PizzaX,PizzaY,250,250);
   fill("#FFD700");
   ellipse(PizzaX,PizzaY,200,200);
-  
-  
-  function mousePressed(ToppingX,ToppingY){
-    if (dist(ToppingX,ToppingY,PizzaX, PizzaY)< 90){
-    toppings.push(new Topping(ToppingX,ToppingY));
     }
   }
-}
-}
+
 //&& dist(ToppingX,ToppingY,PizzaX, PizzaY)< 90 = true
