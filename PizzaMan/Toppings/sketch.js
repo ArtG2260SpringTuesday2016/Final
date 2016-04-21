@@ -1,6 +1,9 @@
 var CurrentTopping;
 var toppings = [];
+var roni = [];
+var shroom = [];
 var WholePizza;
+toppings.push(roni,shroom);
 
 function setup(){
   createCanvas(500,500);
@@ -11,6 +14,11 @@ function setup(){
 function draw(){
   PizzaX = 150;
   PizzaY = 200;
+  roniX = mouseX;
+  roniY = mouseY;
+  shroomX = mouseX;
+  shroomY = mouseY;
+  
 
 
   noStroke();
@@ -27,53 +35,56 @@ function draw(){
   ellipse(55,49,26,13)
   rect(49,50,12,15)
 
+  WholePizza.renderPizza(150,200);
 
-
-check = collidePointRect(mouseX,mouseY,375,50,60,60);
+check = collidePointRect(roniX,roniY,375,50,60,60);
 	if(check){ //change color!
     fill("#E34234")
-	  for (var i=0; i < toppings.length; i++){
-      toppings[i].renderPepperoni();
+	  for (var i=0; i < roni.length; i++){
+      roni[i].renderPepperoni();
 	  }
 	  }else {
-	   fill("black")
-	  
-	
+	   fill("#ccb2ff")
 }
 rect(375,50,60,60);
 
 
-check = collidePointRect(mouseX,mouseY,375,150,60,60);
+check = collidePointRect(shroomX,shroomY,375,150,60,60);
 	if(check){ //change color!
-    fill("#E9C2A6")
-	  for (var i=0; i < toppings.length; i++){
-      toppings[i].renderMushroom();
+    fill("#E9C2A6");
+	  for (var j=0; j < shroom.length; j++){
+      shroom[j].renderMushroom();
 }
 }else {
-  fill("black")
-  
+  fill("#ccb2ff")
 }
 rect(375,150,60,60);
-    }
+  
+
+}
 
 
 function mousePressed(){
-      if (dist(mouseX, mouseY, PizzaX, PizzaY) < 90){
-      toppings.push(new Topping(mouseX,mouseY));
-      }
+        if (dist(roniX, roniY, PizzaX, PizzaY) < 90){
+        roni.push(new Topping(roniX,roniY));
+        } if (dist(shroomX, shroomY, PizzaX, PizzaY) < 90){
+        shroom.push(new Topping(shroomX,shroomY));
 }
+      }
+
+
 
 function Topping(x,y){
   this.x = x;
   this.y = y;
 
-  this.renderPepperoni = function(){  //pepperoni
+  this.renderPepperoni = function(roniX,roniY){  //pepperoni
       noStroke();
       fill("#E34234");
       ellipse(this.x,this.y,20,20)
   }
 
-  this.renderMushroom = function(){ //mushroom
+  this.renderMushroom = function(shroomX,shroomY){ //mushroom
     fill("#E9C2A6");
     ellipse(this.x+1,this.y+1,15,15)
     ellipse(this.x+11,this.y+1,15,15)
@@ -97,8 +108,6 @@ function Pizza(PizzaX,PizzaY){
   ellipse(PizzaX,PizzaY,250,250);
   fill("#FFD700");
   ellipse(PizzaX,PizzaY,200,200);
-  
-  WholePizza.renderPizza(150,200);
     }
   }
 
