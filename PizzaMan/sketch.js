@@ -7,11 +7,11 @@ function setup() {
  // pepperonis[i] = new Pepperoni();
 }
 
-//function mousePressed(){
-//  if (dist(mouseX,mouseY,150,200)< 90){
-  //pepperonis.push(new Pepperoni(mouseX,mouseY));
-//}
-//}
+function mousePressed(){
+  if (dist(mouseX,mouseY,150,200)< 90){
+pepperonis.push(new Pepperoni(mouseX,mouseY));
+}
+}
 
 function draw() {
  
@@ -22,22 +22,10 @@ function draw() {
   ellipse(150,200,200,200);
 
 
-check = collidePointRect(mouseX,mouseY,375,50,60,60);
-	if(check){ //change color!
-    RoniButton == on
-	}else{
-	  RoniButton == off
-	}
-      
-var RoniButton = rect(375,50,60,60);
-
-if (RoniButton == on){
-  if (mouseIsPressed)
-      if (dist(mouseX,mouseY,150,200)< 90){
-      pepperonis.push(new Pepperoni(mouseX,mouseY));
-    }
-  }
+rect(375,50,60,60);
 }
+
+
 
 
  for (var i=0; i < pepperonis.length; i++){

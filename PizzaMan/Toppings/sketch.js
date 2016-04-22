@@ -10,6 +10,7 @@ function setup(){
   createCanvas(500,500);
   background("white");
   WholePizza = new Pizza();
+  
 }
 
 function draw(){
@@ -21,59 +22,53 @@ function draw(){
   shroomY = mouseY;
   oliveX = mouseX;
   oliveY = mouseY;
-  
-
-
-  noStroke();
-  fill('#ECDC98')
-  triangle(20,30,0,40,20, 50);
-  
-  noStroke();
-  fill("#E34234");
-  ellipse(10,10,20,20)
-  
-  fill("#E9C2A6");
-  ellipse(50,50,15,15)
-  ellipse(60,50,15,15)
-  ellipse(55,49,26,13)
-  rect(49,50,12,15)
 
   WholePizza.renderPizza(150,200);
 
-check = collidePointRect(roniX,roniY,375,50,60,60);
-	if(check){ //change color!
-    fill("#E34234")
+checkRoni = collidePointRect(mouseX,mouseY,375,50,60,60);
+	if(checkRoni){ //change color!
+    fill("#E34234");
 	  for (var i=0; i < roni.length; i++){
       roni[i].renderPepperoni();
-	  }
+	  } 
 	  }else {
-	   fill("#ccb2ff")
+	 
+	   fill("#ccb2ff");
+	   for (var i=0; i < roni.length; i++){
+      roni[i].renderPepperoni();
+	     }
 }
+
 rect(375,50,60,60);
 
-
-check = collidePointRect(shroomX,shroomY,375,150,60,60);
-	if(check){ //change color!
+checkShroom = collidePointRect(mouseX,mouseY,375,150,60,60);
+	if(checkShroom){ //change color!
     fill("#E9C2A6");
 	  for (var j=0; j < shroom.length; j++){
       shroom[j].renderMushroom();
+  }
+  }else {
+  fill("#ccb2ff");
+  	  for (var j=0; j < shroom.length; j++){
+      shroom[j].renderMushroom();
+  	  }
 }
-}else {
-  fill("#ccb2ff")
-}
+
 rect(375,150,60,60);
 
-
-check = collidePointRect(oliveX,oliveY,375,250,60,60);
-	if(check){ //change color!
-
-    fill('black');
+checkOlive = collidePointRect(mouseX,mouseY,375,250,60,60);
+	if(checkOlive){ //change color!
+    fill("#000000");
 	  for (var q=0; q < olive.length; q++){
       olive[q].renderOlive();
 }
 }else {
-  fill("#ccb2ff")
+  fill("#ccb2ff");
+    for (var q=0; q < olive.length; q++){
+      olive[q].renderOlive();
+    }
 }
+
 noStroke();
 rect(375,250,60,60);
   
@@ -81,11 +76,11 @@ rect(375,250,60,60);
 
 
 function mousePressed(){
-        if (dist(roniX, roniY, PizzaX, PizzaY) < 90){
+        if ((dist(roniX, roniY, PizzaX, PizzaY) < 90) && (checkRoni=true)) {
         roni.push(new Topping(roniX,roniY));
-        } if (dist(shroomX, shroomY, PizzaX, PizzaY) < 90){
+        }else if ((dist(shroomX, shroomY, PizzaX, PizzaY) < 90) && (checkShroom=true)){
         shroom.push(new Topping(shroomX,shroomY));
-        } if (dist(oliveX, oliveY, PizzaX, PizzaY) < 90){
+        }else if ((dist(oliveX, oliveY, PizzaX, PizzaY) < 90) && (checkShroom=true)){
         olive.push(new Topping(oliveX,oliveY));
         }
 
