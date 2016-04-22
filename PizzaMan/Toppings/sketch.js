@@ -3,77 +3,82 @@ toppings = [];
 roni = [];
 shroom = [];
 olive = [];
-var wholePizza;
+var WholePizza;
+
+
 
 
 function setup(){
   createCanvas(500,500);
   background("white");
   WholePizza = new Pizza();
-  
+
 }
 
 function draw(){
   PizzaX = 150;
   PizzaY = 200;
 
-
   WholePizza.renderPizza(150,200);
-  
-
       
-checkRoni = collidePointRect(mouseX,mouseY,375,50,60,60);
-	if(checkRoni){ //change color!
+check = collidePointRect(mouseX,mouseY,375,50,65,60);
+	if(check){ //change color!
     currentTopping="pepperoni"
-    fill("#E34234");
+
     	for (var i=0; i < roni.length; i++){
       roni[i].renderPepperoni();
     	}
-	  }else if(checkRoni===false){
-	     fill("#ccb2ff");
+	  }else{
+
 	     for (var i=0; i < roni.length; i++){
       roni[i].renderPepperoni();
     	}
 	  
    }
 
-rect(375,50,60,60);
+fill("pink");
+rect(375,50,65,60);
 
-checkShroom = collidePointRect(mouseX,mouseY,375,150,60,60);
-	if(checkShroom){//change color!
+check = collidePointRect(mouseX,mouseY,375,150,65,60);
+	if(check){//change color!
+
 	currentTopping="mushroom"
-    fill("#E9C2A6");
 	  for (var j=0; j < shroom.length; j++){
       shroom[j].renderMushroom();
+      
   }
   }else {
-  fill("#ccb2ff");
   	  for (var j=0; j < shroom.length; j++){
       shroom[j].renderMushroom();
   	  }
 }
 
-rect(375,150,60,60);
+ fill("pink");
+rect(375,150,65,60);
 
-checkOlive = collidePointRect(mouseX,mouseY,375,250,60,60);
-	if(checkOlive){ //change color!
+check = collidePointRect(mouseX,mouseY,375,250,65,60);
+	if(check){ //change color!
 		currentTopping="olive"
-    fill("#000000");
+
 	  for (var q=0; q < olive.length; q++){
       olive[q].renderOlive();
 }
 }else {
-  fill("#ccb2ff");
     for (var q=0; q < olive.length; q++){
       olive[q].renderOlive();
     }
 }
 
+fill("pink");
 noStroke();
-rect(375,250,60,60);
-  
-}
+rect(375,250,65,60);
 
+fill("black");
+text("pepperoni",378,100);
+text("mushrooms",375,200);
+text("olives",390,300);
+
+}
 
 function mousePressed(){
        if (currentTopping==="pepperoni"){
