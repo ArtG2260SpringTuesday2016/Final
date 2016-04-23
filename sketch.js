@@ -1,8 +1,11 @@
+//updated code
 var s;
+var steps = 20; //grid for background
 
 function setup() {
   createCanvas(600,600);
   s = new Snake();
+  frameRate= 2;
 }
 
 function draw() {
@@ -12,38 +15,19 @@ function draw() {
 }
 
 function keyPressed(){
-  if(keyCode === UP){
+  if(keyCode === UP_ARROW){
     s.dir(0,-1);
   }
-  else if (keyCode === DOWN){
+  else if (keyCode === DOWN_ARROW){
   s.dir(0,1);
   }
-  else if (keyCode === RIGHT){
+  else if (keyCode === RIGHT_ARROW){
   s.dir(1,0);
   }
-  else if (keyCode === LEFT){
+  else if (keyCode === LEFT_ARROW){
   s.dir(-1,0);
   }
 }
 
-function Snake() {
-  this.x = 0;
-  this.y = 0;
-  this.xSpeed= 1;
-  this.ySpeed= 0;
-  
-  this.dir = function(x,y) {
-    this.xspeed= x;
-    this.yspeed= y;
-  }
-  
-  this.update = function() {
-    this.x = this.x + this.xspeed;
-    this.y = this.y + this.yspeed;
-  }
-  
-  this.show= function(){
-    fill(255);
-    rect(this.x,this.y,10,10);
-  }
-}
+
+
