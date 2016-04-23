@@ -5,7 +5,7 @@ var steps = 20; //grid for background
 function setup() {
   createCanvas(600,600);
   s = new Snake();
-  frameRate= 10;
+  frameRate= 2;
 }
 
 function draw() {
@@ -15,16 +15,16 @@ function draw() {
 }
 
 function keyPressed(){
-  if(keyCode === UP){
+  if(keyCode === UP_ARROW){
     s.dir(0,-1);
   }
-  else if (keyCode === DOWN){
+  else if (keyCode === DOWN_ARROW){
   s.dir(0,1);
   }
-  else if (keyCode === RIGHT){
+  else if (keyCode === RIGHT_ARROW){
   s.dir(1,0);
   }
-  else if (keyCode === LEFT){
+  else if (keyCode === LEFT_ARROW){
   s.dir(-1,0);
   }
 }
