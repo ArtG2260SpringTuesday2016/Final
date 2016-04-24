@@ -32,11 +32,12 @@ function Snake() {
     //[][][][]
     //new location is in the end of array, old is moved out
     //if snake eats food: [][][][][] <- grows 
-    
-    for (var i = 0; i < this.tail.length - 1; i++) {
-      this.tail[i] = this.tail[i + 1];
+    if(this.total === this.tail.length){
+      for (var i = 0; i < this.tail.length - 1; i++) {
+        this.tail[i] = this.tail[i + 1];
+      }
     }
-    this.tail[total - 1] = createVector(this.x,this.y);
+    this.tail[this.total - 1] = createVector(this.x,this.y);
     
     this.x = this.x + this.xSpeed * steps;
     this.y = this.y + this.ySpeed * steps;
@@ -49,9 +50,9 @@ function Snake() {
   //renders snake 
   this.show = function() {
     fill('hotpink');
-    for(var i = 0; i < this.total; i++){
-      rect(this.tail[i].x,this.tail[i].y,20,20);
-    };
+    for (var i = 0; i < this.tail.length - 1; i++) {
+      rect(this.tail[i].x,this.tail[i].y, 20, 20);
+    }
     
     rect(this.x,this.y,20,20);
   }
