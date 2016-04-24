@@ -3,6 +3,8 @@ function Snake() {
   this.y = 0;
   this.xSpeed = 1;
   this.ySpeed = 0;
+  this.total = 0; //length of snake, initially 0
+  
   
   this.eat = function(pos){
     var d = dist(this.x,this.y,pos.x,pos.y);
