@@ -14,7 +14,7 @@ function setup() {
 function pickLocation(){
   var cols = floor(width/steps);
   var rows = floor(height/steps);
-  food = createVector(floor(random(cols)), (random(rows)));
+  food = createVector(floor(random(cols)), (random(rows))); //stay within grid
   food.mult(steps);
 }
 
