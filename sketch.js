@@ -7,7 +7,7 @@ function setup() {
   createCanvas(600,600);
   s = new Snake();
   frameRate= 2;
-  food = pickLocation();
+  pickLocation();
   //createVector(random(width),random(height));
 }
 
@@ -23,7 +23,9 @@ function draw() {
   s.update();
   s.show();
   
-  if(s.eat) //choose new food location
+  if(s.eat(food)){
+    food= pickLocation();
+  }
   
   fill(255,0,255);
   rect(food.x,food.y,20,20);
