@@ -8,7 +8,7 @@ function Snake() {
   
   this.eat = function(pos){
     var d = dist(this.x,this.y,pos.x,pos.y);
-    if (d < 1) {
+    if (d < 20) {
       this.total++; //snake grows
       return true;
     }
@@ -24,10 +24,19 @@ function Snake() {
   
   //updates steps 
   this.update = function() {
-    for(var i = 0; i < this.total-1; i++){
-      this.tail[i] = this.tail[i + 1]
+    // for(var i = 0; i < this.total-1; i++){
+    //   this.tail[i] = this.tail[i + 1]
+    // }
+    
+    //move location down from array
+    //[][][][]
+    //new location is in the end of array, old is moved out
+    //if snake eats food: [][][][][] <- grows 
+    
+    for (var i = 0; i < this.tail.length - 1; i++) {
+      this.tail[i] = this.tail[i + 1];
     }
-    this.tail[this.total - 1] = createVector(this.x,this.y);
+    this.tail[total - 1] = createVector(this.x,this.y);
     
     this.x = this.x + this.xSpeed * steps;
     this.y = this.y + this.ySpeed * steps;
