@@ -14,14 +14,16 @@ function Snake() {
     this.x = this.x + this.xSpeed * steps;
     this.y = this.y + this.ySpeed * steps;
     
-    this.x = constrain(this.x, 0,width - steps);
-    this.y = constrain(this.y, 0, height - steps);
+    this.x = constrain(this.x, 0,width - 11);
+    this.y = constrain(this.y, 0, height - 11);
+    
   }
-  
   
   //renders snake 
   this.show = function() {
     fill('hotpink');
-    rect(this.x,this.y,10,10);
+    rect(this.x,this.y,20,20);
   }
+  
+  
 }
