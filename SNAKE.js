@@ -42,9 +42,9 @@ function Snake() {
     fill('hotpink');
     for(var i = 0; i < this.total; i++){
       rect(this.tail[i].x,this.tail[i].y,20,20);
-    }
+    };
     
-    rect(this.x,this.y,10,10);
+    rect(this.x,this.y,20,20);
   }
   
   

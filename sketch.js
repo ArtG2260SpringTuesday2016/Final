@@ -1,12 +1,12 @@
 //updated code
 var s;
-var steps = 10; //grid for background
+var steps = 20; //grid for background
 var food;
 
 function setup() {
   createCanvas(600,600);
   s = new Snake();
-  frameRate= .5;
+  frameRate= 30;
   pickLocation();
   //createVector(random(width),random(height));
 }
