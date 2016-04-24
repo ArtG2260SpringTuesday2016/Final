@@ -1,6 +1,6 @@
 //updated code
 var s;
-var steps = 5; //grid for background
+var steps = 10; //grid for background
 var food;
 
 function setup() {

@@ -24,7 +24,7 @@ function Snake() {
   
   //updates steps 
   this.update = function() {
-    for(var i = 0; ; i < this.total-1; i++){
+    for(var i = 0; i < this.total-1; i++){
       this.tail[i] = this.tail[i + 1]
     }
     this.tail[this.total - 1] = createVector(this.x,this.y);
@@ -41,10 +41,10 @@ function Snake() {
   this.show = function() {
     fill('hotpink');
     for(var i = 0; i < this.total; i++){
-      rect(this.tail[i].x,this.tail[i].y,20,20)
+      rect(this.tail[i].x,this.tail[i].y,20,20);
     }
     
-    rect(this.x,this.y,steps,steps);
+    rect(this.x,this.y,10,10);
   }
   
   
