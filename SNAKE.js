@@ -24,25 +24,27 @@ function Snake() {
   
   //updates steps 
   this.update = function() {
+    for(var i = 0; ; i < this.total-1; i++){
+      this.tail[i] = this.tail[i + 1]
+    }
+    this.tail[this.total - 1] = createVector(this.x,this.y);
+    
     this.x = this.x + this.xSpeed * steps;
     this.y = this.y + this.ySpeed * steps;
     
     this.x = constrain(this.x, 0,width - 11);
     this.y = constrain(this.y, 0, height - 11);
     
-    for(var i = 0; ; i < this.total-1; i++){
-      this.tail[i] = this.tail[i + 1]
-    }
-    
-    this.tail[this.total - 1] = createVector(this.x,this.y);
   }
   
   //renders snake 
   this.show = function() {
+    fill('hotpink');
     for(var i = 0; i < this.total; i++){
       rect(this.tail[i].x,this.tail[i].y,20,20)
     }
-    fill('hotpink');
+    
+    rect(this.x,this.y,steps,steps);
   }
   
   
