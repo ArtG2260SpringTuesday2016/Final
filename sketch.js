@@ -5,7 +5,6 @@ var c = [120, 90, 20, 20, 100, 305, 20, 20, 340, 90, 20, 20, 440, 165, 20, 20, 4
 function setup() {
   createCanvas(550, 400);
   var blockade = [230, 50, 25, 300, 50, 50, 200, 25, 160, 87, 25, 100, 98, 125, 100, 25, 90, 50, 180, 25, 400, 50, 200, 25, 300, 87, 25, 100, 402, 125, 180, 25, 352, 50, 270, 25, 352, 50, 270, 25, 260, 270, 420, 25, 480, 242, 25, 210, 63, 305, 25, 60, 185, 340, 270, 25, 440, 340, 100, 25];
-  var c = [120, 90, 20, 20, 100, 305, 20, 20, 340, 90, 20, 20, 440, 165, 20, 20, 440, 235, 20, 20];
   coins = new Group();
   var bc = function() {
     for (var i = 0; i < 60; i += 4) {
@@ -40,13 +39,14 @@ function setup() {
 }
 
 function coinsss() {
+  for(var i = 0; i < 5; i+=4){
   this.x = c[i];
-  this.y = c[i + 1];
+  this.y = c[i+1];
   this.z = 20;
   this.w = 20;
-
+}
   this.display = function() {
-    createSprite(this.x, this.y, this.z, this.w);
+    (this.x, this.y, this.z, this.w);
   }
 }
 
