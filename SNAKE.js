@@ -8,7 +8,7 @@ function Snake() {
   
   this.eat = function(pos){
     var d = dist(this.x,this.y,pos.x,pos.y);
-    if (d < 20) {
+    if (d < 10) {
       this.total++; //snake grows
       return true;
     }
