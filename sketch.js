@@ -1,12 +1,11 @@
 // GLOBAL VARIABLES
 
-var leftWall = 0;
-var rightWall = 300;
-
 var tetrad=[];
+var buildUp=[]
 var w = 30;
+
 var xpos = 120;
-var ypos = 0;
+var ypos = 0
 
 // UNIT FUNCTION
 
@@ -22,58 +21,58 @@ function block(x,y,type){
 
   if(type=="O"){
     fill('yellow');
-    unit(x,y)
-    unit(x+w,y)
-    unit(x,y+w)
-    unit(x+w,y+w)
+    unit(x,y);
+    unit(x+w,y);
+    unit(x,y+w);
+    unit(x+w,y+w);
   }
   
   else if(type=="T"){
     fill('purple');
-    unit(x,y)
-    unit(x+w,y)
-    unit(x-w,y)
-    unit(x,y-w)
+    unit(x,y);
+    unit(x+w,y);
+    unit(x-w,y);
+    unit(x,y-w);
   }
   
   else if(type=="J"){
     fill('blue');
-    unit(x,y)
-    unit(x,y-w)
-    unit(x,y+w)
-    unit(x+w,y-w)
+    unit(x,y);
+    unit(x,y-w);
+    unit(x,y+w);
+    unit(x+w,y-w);
   }
   
   else if(type=="L"){
     fill('orange');
-    unit(x,y)
-    unit(x,y-w)
-    unit(x,y+w)
-    unit(x+w,y+w)
+    unit(x,y);
+    unit(x,y-w);
+    unit(x,y+w);
+    unit(x+w,y+w);
   }
   
   else if(type=="Z"){
     fill('red');
-    unit(x,y)
-    unit(x+w,y)
-    unit(x,y-w)
-    unit(x-w,y-w)
+    unit(x,y);
+    unit(x+w,y);
+    unit(x,y-w);
+    unit(x-w,y-w);
   }
   
   else if(type=="S"){
     fill('green');
-    unit(x,y)
-    unit(x+w,y)
-    unit(x,y+w)
-    unit(x-w,y+w)
+    unit(x,y);
+    unit(x+w,y);
+    unit(x,y+w);
+    unit(x-w,y+w);
   }
   
   else if(type=="I"){
     fill('#89f');
-    unit(x,y)
-    unit(x-w,y)
-    unit(x+w,y)
-    unit(x+w+w,y)
+    unit(x,y);
+    unit(x-w,y);
+    unit(x+w,y);
+    unit(x+w+w,y);
   }
 }
 
@@ -112,11 +111,11 @@ function mousePressed(){
 // KEY PRESSES
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW && tetrad[tetrad.length-1].x<width-w) {
+  if (keyCode === RIGHT_ARROW) {
     tetrad[tetrad.length-1].x+=w;
-  } else if (keyCode === LEFT_ARROW && tetrad[tetrad.length-1].x>w) {
+  } else if (keyCode === LEFT_ARROW) {
     tetrad[tetrad.length-1].x-=w;
-  } else if (keyCode === DOWN_ARROW && tetrad[tetrad.length-1].y<height-w) {
+  } else if (keyCode === DOWN_ARROW) {
     tetrad[tetrad.length-1].y+=w;
     return false;
   } else if (keyCode === 32) {
@@ -126,11 +125,11 @@ function keyPressed() {
 
 // STOP AT BOTTOM
 
-function rockBottom(){
-  if(tetrad[tetrad.length-1].y===height-30){
-    noLoop();
-  }
-}
+// function rockBottom(){
+//   if(tetrad[tetrad.length-1].y===height-30){
+//     noLoop();
+//   }
+// }
 
 // SETUP + DRAW FUNCTION
 
