@@ -15,78 +15,82 @@ function unit (x,y){
   rect(x,y,30,30);
 }
 
-// BLOCK FUNCTIONS
+// 7 BLOCK TYPES
 
-function block(x,y,type){
+function block(x,y,x2,y2,x3,y3,x4,type){
 
   if(type=="O"){
     fill('yellow');
     unit(x,y);
-    unit(x+w,y);
-    unit(x,y+w);
-    unit(x+w,y+w);
+    unit(x2,y);
+    unit(x,y2);
+    unit(x2,y2);
   }
   
   else if(type=="T"){
     fill('purple');
     unit(x,y);
-    unit(x+w,y);
-    unit(x-w,y);
-    unit(x,y-w);
+    unit(x2,y);
+    unit(x3,y);
+    unit(x,y3);
   }
   
   else if(type=="J"){
     fill('blue');
     unit(x,y);
-    unit(x,y-w);
-    unit(x,y+w);
-    unit(x+w,y-w);
+    unit(x,y3);
+    unit(x,y2);
+    unit(x2,y3);
   }
   
   else if(type=="L"){
     fill('orange');
     unit(x,y);
-    unit(x,y-w);
-    unit(x,y+w);
-    unit(x+w,y+w);
+    unit(x,y3);
+    unit(x,y2);
+    unit(x2,y2);
   }
   
   else if(type=="Z"){
     fill('red');
     unit(x,y);
-    unit(x+w,y);
-    unit(x,y-w);
-    unit(x-w,y-w);
+    unit(x2,y);
+    unit(x,y3);
+    unit(x3,y3);
   }
   
   else if(type=="S"){
     fill('green');
     unit(x,y);
-    unit(x+w,y);
-    unit(x,y+w);
-    unit(x-w,y+w);
+    unit(x2,y);
+    unit(x,y2);
+    unit(x3,y2);
   }
   
   else if(type=="I"){
     fill('#89f');
     unit(x,y);
-    unit(x-w,y);
-    unit(x+w,y);
-    unit(x+w+w,y);
+    unit(x3,y);
+    unit(x2,y);
+    unit(x4,y);
   }
 }
 
 // TETRAD CLASS
   
-function Tetrad(x,y,type){
-  this.x=x;
-  this.y=y;
+function Tetrad(x,y,x2,y2,x3,y3,x4,type){
+  x=this.x;
+  y=this.y;
+  
+  // x2=this.x+w; y2=this.y+w;
+  // x3=this.x-w; y3=this.y-w;
+  // x4=this.x+w+w;
   
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
       
   this.display=function(){
-    block(constrain(this.x,0,300),constrain(this.y,0,630), letters[index]);
+    block(constrain(this.x,0,300),constrain(this.y,0,630),this.x+w,this.y+w, this.x-w,this.y-w,this.x+w+w, letters[index]);
   }
   
   this.move=function(){
@@ -102,7 +106,6 @@ function Tetrad(x,y,type){
   this.deactivate=function(){
     hit=collideRectRect(0,660,300,30,tetrad[0].x,tetrad[0].y, 30,30);
     print("colliding?" + hit);
-    print(tetrad[0]);
     print(buildup[0]);
     
     if(hit){
@@ -114,8 +117,8 @@ function Tetrad(x,y,type){
   }
   
   this.render=function(){
-    this.move();
     this.display();
+    this.move();
     this.deactivate();
   }
 }
@@ -142,7 +145,12 @@ function setup(){
   createCanvas(300,690);
   
   // PUSHING NEW TETRADS TO ARRAY
-  var temp = new Tetrad(xpos,ypos);
+  var temp = new Tetrad(xpos,ypos,xpos+w,ypos+w,xpos-w,ypos-w,xpos+w+w);
+// x2=this.x+w;
+// y2=this.y+w;
+// x3=this.x-w;
+// y3=this.y-w;
+// x4=this.x+w+w;
   tetrad.push(temp);
 }
 
