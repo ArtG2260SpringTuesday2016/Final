@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
-
+var hit=false;
 var tetrad=[];
-var buildUp=[]
+var buildUp=[];
 var w = 30;
 
 var xpos = 120;
@@ -77,7 +77,7 @@ function block(x,y,type){
 }
 
 // TETRAD CLASS
-
+  
 function Tetrad(x,y,type){
   this.x=x;
   this.y=y;
@@ -86,24 +86,56 @@ function Tetrad(x,y,type){
   var index = floor(random(letters.length));
       
   this.display=function(){
-      block(constrain(this.x,0,300),constrain(this.y,0,630), letters[index]);
+    block(constrain(this.x,0,300),constrain(this.y,0,630), letters[index]);
   }
   
   this.move=function(){
     this.y+=1;
   }
   
+  // COLLECTING BUILDUP (detet collisions of tetrads, then store in new array)
+  this.collection=function(){
+    hit=collideRectRect(0,660,300,30,this.x,this.y, 60,60);
+    print("colliding?" + hit);
+    
+    for(var i=0; i<tetrad.length; i++){
+      if(hit){
+        buildUp.push(tetrad[i]);
+        tetrad.splice(i,1);
+        console.log(buildUp[i].x,buildUp[i].y)
+      }
+    }
+  }
+  
   this.render=function(){
     this.move();
     this.display();
+    this.collection();
   }
 }
+
+// BUILDUP CLASS
+
+// function Build(x,y){
+//   this.x=buildUp[i].x;
+//   this.y=buildUp[i].y;
+  
+//   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
+//   var index = floor(random(letters.length));
+      
+//   this.display=function(){
+//     block(x,y,letters[index]);
+//   }
+// }
+
 
 // GENERATE TETRAD
 
 function mousePressed(){
-  var temp = new Tetrad(xpos,ypos);
-  tetrad.push(temp);
+  if(tetrad.length == 0){
+    var temp = new Tetrad(xpos,ypos);
+    tetrad.push(temp);
+  }
 }
 
 // KEY PRESSES
@@ -121,10 +153,11 @@ function keyPressed() {
   }
 }
 
+
 // SETUP + DRAW FUNCTION
 
 function setup(){
-    createCanvas(300,660);
+  createCanvas(300,690);
 }
 
 function draw() {
@@ -132,4 +165,9 @@ function draw() {
     for (var i=0; i<tetrad.length; i++){
       tetrad[i].render();
     }
+    for (var i=0; i<buildUp.length; i++){
+      buildUp[i];
+    }
+    fill('red');
+    rect(0,660,300,30);
 }
