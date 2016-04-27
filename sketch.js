@@ -90,18 +90,26 @@ function Tetrad(x,y,type){
   }
   
   this.move=function(){
-    this.y+=1;
+    if (keyIsPressed === false ){   // moving in ticks
+      this.y+=30;
+      frameRate(1.5);
+    } else if (keyIsDown(DOWN_ARROW)){  // smooth movement
+      frameRate(30);
+    }
   }
   
-  // COLLECTING BUILDUP (detet collisions of tetrads, then store in new array)
+  // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
-    hit=collideRectRect(0,660,300,30,this.x,this.y, 60,60);
+    hit=collideRectRect(0,660,300,30,tetrad[0].x,tetrad[0].y, 30,30);
     print("colliding?" + hit);
+    print(tetrad[0]);
+    print(buildup[0]);
     
-    for(var i=0; i<tetrad.length; i++){
-      if(hit){
-        tetrad.splice(i,1);
-      }
+    if(hit){
+      var temp = new Tetrad(xpos,ypos);
+      buildup.push(tetrad[0]);
+      tetrad.splice(0,1);
+      tetrad.push(temp);
     }
   }
   
@@ -110,33 +118,6 @@ function Tetrad(x,y,type){
     this.display();
     this.deactivate();
   }
-}
-
-// BUILDUP CLASS
-
-// function Build(x,y){
-//   this.x=buildup[i].x;
-//   this.y=buildup[i].y;
-  
-//   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
-//   var index = floor(random(letters.length));
-      
-//   this.display=function(){
-//     block(x,y,letters[index]);
-//   }
-// }
-
-
-// SAVE TETRADS TO ARRAYS
-
-function mousePressed(){
-  var temp = new Tetrad(xpos,ypos);
-  if(tetrad.length == 0){
-    tetrad.push(temp);
-  }
-  
-  buildup.push(temp);
-  console.log(buildup)
 }
 
 // KEY PRESSES
@@ -159,18 +140,24 @@ function keyPressed() {
 
 function setup(){
   createCanvas(300,690);
+  
+  // PUSHING NEW TETRADS TO ARRAY
+  var temp = new Tetrad(xpos,ypos);
+  tetrad.push(temp);
 }
 
 function draw() {
-    background(20,20,20);
-    for (var i=0; i<tetrad.length; i++){
-      tetrad[i].render();
-    }
-    
-    for (var i=0; i<buildup.length; i++){
-      buildup[i].render();
-    }
-    
-    fill('red');
-    rect(0,660,300,30);
+  background(20,20,20);
+
+  for (var i=0; i<tetrad.length; i++){
+    tetrad[i].render();
+  }
+  
+  for (var i=0; i<buildup.length; i++){
+    buildup[i].render();
+    //console.log(buildup[i]);
+  }
+  
+  fill('red');
+  rect(0,660,300,30);
 }
