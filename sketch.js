@@ -8,7 +8,6 @@ var w = 30;
 var xpos = 120;
 var ypos = 0;
 
-
 // UNIT FUNCTION
 
 function unit (x,y){
@@ -92,8 +91,9 @@ function Tetrad(x,y,type){
     }
     
     this.move=function(){
+      if (tetrad[tetrad.length-1].y<height-w){
         this.y+=1;
-        rockBottom();
+      }
     }
     
     this.render=function(){
@@ -102,24 +102,29 @@ function Tetrad(x,y,type){
     }
 }
 
+// GENERATE TETRAD
+
+function mousePressed(){
+  var temp = new Tetrad(xpos,ypos);
+  tetrad.push(temp);
+}
+
 // KEY PRESSES
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW && tetrad[tetrad.length-1].x<270) {
+  if (keyCode === RIGHT_ARROW && tetrad[tetrad.length-1].x<width-w) {
     tetrad[tetrad.length-1].x+=w;
-  } else if (keyCode === LEFT_ARROW && tetrad[tetrad.length-1].x>30) {
+  } else if (keyCode === LEFT_ARROW && tetrad[tetrad.length-1].x>w) {
     tetrad[tetrad.length-1].x-=w;
-  } else if (keyCode === DOWN_ARROW) {
+  } else if (keyCode === DOWN_ARROW && tetrad[tetrad.length-1].y<height-w) {
     tetrad[tetrad.length-1].y+=w;
     return false;
   } else if (keyCode === 32) {
     tetrad[tetrad.length-1].y=height-30;
-    noLoop();
   }
 }
 
 // STOP AT BOTTOM
-
 
 function rockBottom(){
   if(tetrad[tetrad.length-1].y===height-30){
@@ -131,11 +136,6 @@ function rockBottom(){
 
 function setup(){
     createCanvas(300,660);
-}
-
-function mousePressed(){
-  var temp = new Tetrad(xpos,ypos);
-  tetrad.push(temp);
 }
 
 function draw() {
