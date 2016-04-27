@@ -1,5 +1,8 @@
 // GLOBAL VARIABLES
 
+var leftWall = 0;
+var rightWall = 300;
+
 var tetrad=[];
 var w = 30;
 var xpos = 120;
@@ -89,7 +92,6 @@ function Tetrad(x,y,type){
     }
     
     this.move=function(){
-        this.x+=0;
         this.y+=1;
         rockBottom();
     }
@@ -103,9 +105,9 @@ function Tetrad(x,y,type){
 // KEY PRESSES
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW) {
+  if (keyCode === RIGHT_ARROW && tetrad[tetrad.length-1].x<270) {
     tetrad[tetrad.length-1].x+=w;
-  } else if (keyCode === LEFT_ARROW) {
+  } else if (keyCode === LEFT_ARROW && tetrad[tetrad.length-1].x>30) {
     tetrad[tetrad.length-1].x-=w;
   } else if (keyCode === DOWN_ARROW) {
     tetrad[tetrad.length-1].y+=w;
@@ -117,6 +119,7 @@ function keyPressed() {
 }
 
 // STOP AT BOTTOM
+
 
 function rockBottom(){
   if(tetrad[tetrad.length-1].y===height-30){
