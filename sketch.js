@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
 var hit=false;
 var tetrad=[];
-var buildUp=[];
+var buildup=[];
 var w = 30;
 
 var xpos = 120;
@@ -94,15 +94,13 @@ function Tetrad(x,y,type){
   }
   
   // COLLECTING BUILDUP (detet collisions of tetrads, then store in new array)
-  this.collection=function(){
+  this.deactivate=function(){
     hit=collideRectRect(0,660,300,30,this.x,this.y, 60,60);
     print("colliding?" + hit);
     
     for(var i=0; i<tetrad.length; i++){
       if(hit){
-        buildUp.push(tetrad[i]);
         tetrad.splice(i,1);
-        console.log(buildUp[i].x,buildUp[i].y)
       }
     }
   }
@@ -110,15 +108,15 @@ function Tetrad(x,y,type){
   this.render=function(){
     this.move();
     this.display();
-    this.collection();
+    this.deactivate();
   }
 }
 
 // BUILDUP CLASS
 
 // function Build(x,y){
-//   this.x=buildUp[i].x;
-//   this.y=buildUp[i].y;
+//   this.x=buildup[i].x;
+//   this.y=buildup[i].y;
   
 //   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
 //   var index = floor(random(letters.length));
@@ -129,13 +127,16 @@ function Tetrad(x,y,type){
 // }
 
 
-// GENERATE TETRAD
+// SAVE TETRADS TO ARRAYS
 
 function mousePressed(){
+  var temp = new Tetrad(xpos,ypos);
   if(tetrad.length == 0){
-    var temp = new Tetrad(xpos,ypos);
     tetrad.push(temp);
   }
+  
+  buildup.push(temp);
+  console.log(buildup)
 }
 
 // KEY PRESSES
@@ -165,9 +166,11 @@ function draw() {
     for (var i=0; i<tetrad.length; i++){
       tetrad[i].render();
     }
-    for (var i=0; i<buildUp.length; i++){
-      buildUp[i];
+    
+    for (var i=0; i<buildup.length; i++){
+      buildup[i].render();
     }
+    
     fill('red');
     rect(0,660,300,30);
 }
