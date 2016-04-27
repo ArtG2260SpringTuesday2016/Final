@@ -2,10 +2,11 @@
 var hit=false;
 var tetrad=[];
 var buildup=[];
+var allunits=[];
 var w = 30;
 
 var xpos = 120;
-var ypos = 0
+var ypos = 0;
 
 // UNIT FUNCTION
 
@@ -17,7 +18,12 @@ function unit (x,y){
 
 // 7 BLOCK TYPES
 
-function block(x,y,x2,y2,x3,y3,x4,type){
+function block(x,y,type){
+  x2=x+w;
+  y2=y+w;
+  x3=x-w;
+  y3=y-w;
+  x4=x+w+w;
 
   if(type=="O"){
     fill('yellow');
@@ -78,19 +84,15 @@ function block(x,y,x2,y2,x3,y3,x4,type){
 
 // TETRAD CLASS
   
-function Tetrad(x,y,x2,y2,x3,y3,x4,type){
-  x=this.x;
-  y=this.y;
-  
-  // x2=this.x+w; y2=this.y+w;
-  // x3=this.x-w; y3=this.y-w;
-  // x4=this.x+w+w;
+function Tetrad(x,y,type){
+  this.x=x;
+  this.y=y;
   
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
       
   this.display=function(){
-    block(constrain(this.x,0,300),constrain(this.y,0,630),this.x+w,this.y+w, this.x-w,this.y-w,this.x+w+w, letters[index]);
+    block(constrain(this.x,0,300),constrain(this.y,0,630),letters[index]);
   }
   
   this.move=function(){
@@ -105,8 +107,6 @@ function Tetrad(x,y,x2,y2,x3,y3,x4,type){
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
     hit=collideRectRect(0,660,300,30,tetrad[0].x,tetrad[0].y, 30,30);
-    print("colliding?" + hit);
-    print(buildup[0]);
     
     if(hit){
       var temp = new Tetrad(xpos,ypos);
@@ -145,13 +145,13 @@ function setup(){
   createCanvas(300,690);
   
   // PUSHING NEW TETRADS TO ARRAY
-  var temp = new Tetrad(xpos,ypos,xpos+w,ypos+w,xpos-w,ypos-w,xpos+w+w);
-// x2=this.x+w;
-// y2=this.y+w;
-// x3=this.x-w;
-// y3=this.y-w;
-// x4=this.x+w+w;
+  var temp = new Tetrad(xpos,ypos);
   tetrad.push(temp);
+  
+  // all units stored
+  // var temp2 = new block(tetrad[0].x,tetrad[0].y, "T");
+  // allunits.push(temp2);
+  // console.log("see"+allunits[0]);
 }
 
 function draw() {
@@ -163,7 +163,6 @@ function draw() {
   
   for (var i=0; i<buildup.length; i++){
     buildup[i].render();
-    //console.log(buildup[i]);
   }
   
   fill('red');
