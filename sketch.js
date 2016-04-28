@@ -2,60 +2,71 @@
 var hit=false;
 var tetrad=[];
 var buildup=[];
-var allunits=[];
-var w = 30;
+var pieces_x = [];
+var pieces_y = [];
 
+var w = 30;
 var xpos = 120;
 var ypos = 0;
 
 // TETRAD CLASS
   
-function Tetrad(x,y,type){
+function Tetrad(x,y){
   this.x=x;
   this.y=y;
-  
-  var pieces = [];
   
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
   
   this.generate=function(){
-    pieces.push(this.x,this.y);
+    pieces_x.push(this.x);
+    pieces_y.push(this.y);
+    
+    
     if(letters[index] === "O"){
       fill('yellow');
-      pieces.push(this.x+w,this.y,this.x,this.y+w,this.x+w,this.y+w);
+      pieces_x.push(this.x+w,this.x,this.x+w);
+      pieces_y.push(this.y,this.y+w,this.y+w);
     } else if(letters[index] === "T"){
       fill('purple');
-      pieces.push(this.x+w,this.y,this.x-w,this.y,this.x,this.y-w)
+      pieces_x.push(this.x+w,this.x-w,this.x);
+      pieces_y.push(this.y,this.y,this.y-w);
     } else if(letters[index] === "J"){
       fill('blue');
-      pieces.push(this.x,this.y-w,this.x,this.y+w,this.x+w,this.y-w);
+      pieces_x.push(this.x,this.x,this.x+w);
+      pieces_y.push(this.y-w,this.y+w,this.y-w);
     } else if(letters[index] === "L"){
       fill('orange');
-      pieces.push(this.x,this.y-w,this.x,this.y+w,this.x+w,this.y+w);
+      pieces_x.push(this.x,this.x,this.x+w);
+      pieces_y.push(this.y-w,this.y+w,this.y+w);
     } else if(letters[index] === "Z"){
       fill('red');
-      pieces.push(this.x+w,this.y,this.x,this.y-w,this.x-w,this.y-w);
+      pieces_x.push(this.x+w,this.x,this.x-w);
+      pieces_y.push(this.y,this.y-w,this.y-w);
     } else if(letters[index] === "S"){
       fill('green');
-      pieces.push(this.x+w,this.y,this.x,this.y+w,this.x-w,this.y+w);
+      pieces_x.push(this.x+w,this.x,this.x-w);
+      pieces_y.push(this.y,this.y+w,this.y+w);
     } else if(letters[index] === "I"){
       fill('#89f');
-      pieces.push(this.x-w,this.y,this.x+w,this.y,this.x+w+w,this.y);
+      pieces_x.push(this.x-w,this.x+w,this.x+w+w);
+      pieces_y.push(this.y,this.y,this.y);
     }
   }
       
   this.display=function(){
     strokeWeight(1.2);
     stroke('black');
-    for(var i=0; i<7; i+2){
-      rect(pieces[i],pieces[i+1],30,30);
+    for(var i=0; i<pieces_x.length; i++){
+      rect(constrain(pieces_x[i],0,width),constrain(pieces_y[i],0,height),w,w);
     }
   }
   
   this.move=function(){
     if (keyIsPressed === false ){   // moving in ticks
-      this.y+=30;
+      for(var i=0; i<pieces_y.length; i++){
+        pieces_y[i]+=w;
+      }
       frameRate(1.5);
     } else if (keyIsDown(DOWN_ARROW)){  // smooth movement
       frameRate(30);
@@ -64,14 +75,18 @@ function Tetrad(x,y,type){
   
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
-    hit=collideRectRect(0,660,300,30,tetrad[0].x,tetrad[0].y, 30,30);
-    
+    hit=collideRectRect(0,height,width,w,pieces_x,pieces_y, w,w);
     if(hit){
       var temp = new Tetrad(xpos,ypos);
-      buildup.push(tetrad[0]);
-      tetrad.splice(0,1);
-      tetrad.push(temp);
+      buildup.push(pieces_x,pieces_y);
+      pieces_x.splice(0,4);
+      pieces_y.splice(0,4);
+      
+      for(var i=0; i<pieces_x.length; i+=2){
+        pieces_x.push(temp);
+      }
     }
+    
   }
   
   this.render=function(){
@@ -85,15 +100,20 @@ function Tetrad(x,y,type){
 // KEY PRESSES
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW && tetrad[tetrad.length-1].x<width ) {
-    tetrad[tetrad.length-1].x+=w;
-  } else if (keyCode === LEFT_ARROW && tetrad[tetrad.length-1].x>0) {
-    tetrad[tetrad.length-1].x-=w;
-  } else if (keyCode === DOWN_ARROW && tetrad[tetrad.length-1].y<height ) {
-    tetrad[tetrad.length-1].y+=w;
-    return false;
+  if (keyCode === RIGHT_ARROW ) {
+    for(var i=0; i<pieces.length; i+=2){
+      pieces[i]+=w;
+    }
+  } else if (keyCode === LEFT_ARROW) {
+    for(var i=0; i<pieces.length; i+=2){
+      pieces[i]-=w;
+    }
+  } else if (keyCode === DOWN_ARROW) {
+    for(var i=1; i<pieces.length; i+=2){
+      pieces[i]+=w;
+    }
   } else if (keyCode === 32) {
-    tetrad[tetrad.length-1].y=height-30;
+    tetrad[1]=height-30;
   }
 }
 
@@ -106,11 +126,6 @@ function setup(){
   // PUSHING NEW TETRADS TO ARRAY
   var temp = new Tetrad(xpos,ypos);
   tetrad.push(temp);
-  
-  // all units stored
-  // var temp2 = new block(tetrad[0].x,tetrad[0].y, "T");
-  // allunits.push(temp2);
-  // console.log("see"+allunits[0]);
 }
 
 function draw() {
@@ -126,4 +141,6 @@ function draw() {
   
   fill('red');
   rect(0,660,300,30);
+  
+//  console.log(buildup[0]);
 }
