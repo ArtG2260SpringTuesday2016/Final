@@ -25,6 +25,7 @@
 //Site_Energy_Use and Year_Built will be used
 //in order to compare amount of energy used to the age of the building
 var getHeight = "Hover over each rectangle to show the energy usage for that year";
+var getYear = "";
 
 var Property = function (xposn, yposn, sizeY){
  this.x = xposn;
@@ -125,14 +126,9 @@ function setup() {
   
   fill("Black")
   rect(0, height * .835, width, 0);
-  
-
-
-
-
-
-
-  //Compare old:energy to new:energy; two functions; one with all old energies,
+ 
+   //Compare old:energy to new:energy; two functions; one with all old energies,
   //one with all new energies
+  console.log(Old);
 
 }
