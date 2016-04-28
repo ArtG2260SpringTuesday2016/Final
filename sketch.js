@@ -2,11 +2,7 @@ var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Snowfall in inches in Boston in January from 2010-2016";
 
-var input1, 
-    input2, 
-    button, 
-    results, 
-    error = "";
+var input1, input2, button, results, error = "";
 
 
 // Rectangle Class
@@ -51,7 +47,7 @@ var TextBox = function(title) {
     this.box.position(xPos, yPos);
     this.box.input(validateNumberInput);
   }
- 
+  
   validateNumberInput = function() {
    // check the values in the text boxes
     if (this.value() === "") {
@@ -73,7 +69,6 @@ var TextBox = function(title) {
       text(error, 250, 595);
       this.isValid = true;
     }
-    return;
   }
 }
 
@@ -93,13 +88,23 @@ var Button = function(title) {
     var day2 = input2.box.value();
   
     // access the rectangle class variable for each day
-    var dataForDayOne = dataArr[day1-1];
-    var dataForDayTwo = dataArr[day2-1];
+    var dayOneRectangle = dataArr[day1-1];
+    var dayTwoRectangle = dataArr[day2-1];
+  
+  
+    // pass rectangle class object into the button class
+    calculateAvgBetweenTwoRectangles(dayOneRectangle, dayTwoRectangle);
+  }
+  
+  
+  // Function in the Button class that takes in two Rectangle class objects as parameters and 
+  // calculates the avg snowfall between the two days associated with the given rectangle objects
+  calculateAvgBetweenTwoRectangles = function(rectangleOne, rectangleTwo) {
   
     // perform the calculation
-    var avg = ((dataForDayOne.snowfallValue) + (dataForDayTwo.snowfallValue))/2;
+    var avg = ((rectangleOne.snowfallValue) + (rectangleTwo.snowfallValue))/2;
   
-    error="Avg Snowfall for Jan " + day1 + " & Jan " + day2 + " is  " + avg + "   inches";
+    error="Avg Snowfall for Jan " + rectangleOne.day + " & Jan " + rectangleTwo.day + " is  " + avg + "   inches";
     text(error, 250, 595);
   }
   
