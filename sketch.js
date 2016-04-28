@@ -24,15 +24,25 @@
 //For the purposes of this program only 
 //Site_Energy_Use and Year_Built will be used
 //in order to compare amount of energy used to the age of the building
+var getHeight = "Hover over each rectangle to show the energy usage for that year";
+
 var Property = function (xposn, yposn, sizeY){
  this.x = xposn;
  this.y = yposn;
  this.width = 3;
  this.height = sizeY;
  
- this.renderGraph = function() {
+ this.renderGraph = function(col) {
+  fill(col);
   rect(this.x, this.y, this.width, this.height)
  }
+ this.showSize = function(x) {
+  if (collidePointRect(mouseX, mouseY, x, height - this.height)) {
+   getHeight = this.height;
+  }
+ }
+ 
+
 }
 var currentYear = 2016;
 var age = 50;
