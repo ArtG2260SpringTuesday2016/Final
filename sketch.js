@@ -2,8 +2,6 @@
 var hit=false;
 var tetrad=[];
 var buildup=[];
-var pieces_x = [];
-var pieces_y = [];
 
 var w = 30;
 var xpos = 120;
@@ -17,55 +15,55 @@ function Tetrad(x,y){
   
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
+  var pieces = [];
   
   this.generate=function(){
-    pieces_x.push(this.x);
-    pieces_y.push(this.y);
-    
+    var piece = {"x":this.x,  "y": this.y};
+    var pieceO={"x":{this.x+w, this.x, this.x+w}, "y":{this.y, this.y+w, this.y+w};
+    var pieceT={"x":{this.x+w, this.x-w, this.x}, "y":{this.y, this.y, this.y-w};
+    var pieceJ={"x":this.x,   "y":this.y-w, "x":this.x,   "y":this.y+w, "x":this.x+w,"y":this.y-w};
+    var pieceL={"x":this.x,   "y":this.y-w, "x": this.x,  "y":this.y+w, "x": this.x+w,"y":this.y+w};
+    var pieceZ={"x":this.x+w, "y":this.y,   "x":this.x,   "y":this.y-w, "x":this.x-w,"y":this.y-w};
+    var pieceS={"x":this.x+w, "y":this.y,   "x":this.x,   "y":this.y+w, "x":this.x-w,"y":this.y+w};
+    var pieceI={"x":this.x-w, "y":this.y,   "x":this.x+w, "y":this.y,   "x":this.x+w+w,"y":this.y};
+    pieces.push(piece);
     
     if(letters[index] === "O"){
       fill('yellow');
-      pieces_x.push(this.x+w,this.x,this.x+w);
-      pieces_y.push(this.y,this.y+w,this.y+w);
+      pieces.push(pieceO);
     } else if(letters[index] === "T"){
       fill('purple');
-      pieces_x.push(this.x+w,this.x-w,this.x);
-      pieces_y.push(this.y,this.y,this.y-w);
+      pieces.push(pieceT);
     } else if(letters[index] === "J"){
       fill('blue');
-      pieces_x.push(this.x,this.x,this.x+w);
-      pieces_y.push(this.y-w,this.y+w,this.y-w);
+      pieces.push(pieceJ);
     } else if(letters[index] === "L"){
       fill('orange');
-      pieces_x.push(this.x,this.x,this.x+w);
-      pieces_y.push(this.y-w,this.y+w,this.y+w);
+      pieces.push(pieceL);
     } else if(letters[index] === "Z"){
       fill('red');
-      pieces_x.push(this.x+w,this.x,this.x-w);
-      pieces_y.push(this.y,this.y-w,this.y-w);
+      pieces.push(pieceZ);
     } else if(letters[index] === "S"){
       fill('green');
-      pieces_x.push(this.x+w,this.x,this.x-w);
-      pieces_y.push(this.y,this.y+w,this.y+w);
+      pieces.push(pieceS);
     } else if(letters[index] === "I"){
       fill('#89f');
-      pieces_x.push(this.x-w,this.x+w,this.x+w+w);
-      pieces_y.push(this.y,this.y,this.y);
+      pieces.push(pieceI);
     }
   }
       
   this.display=function(){
     strokeWeight(1.2);
     stroke('black');
-    for(var i=0; i<pieces_x.length; i++){
-      rect(constrain(pieces_x[i],0,width),constrain(pieces_y[i],0,height),w,w);
+    for(var i=0; i<pieces.length; i++){
+      rect(constrain(pieces[i].x,0,width),constrain(pieces[i].y,0,height),w,w);
     }
   }
   
   this.move=function(){
     if (keyIsPressed === false ){   // moving in ticks
-      for(var i=0; i<pieces_y.length; i++){
-        pieces_y[i]+=w;
+      for(var i=0; i<pieces.length; i++){
+        pieces[i].y+=w;
       }
       frameRate(1.5);
     } else if (keyIsDown(DOWN_ARROW)){  // smooth movement
@@ -75,18 +73,13 @@ function Tetrad(x,y){
   
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
-    hit=collideRectRect(0,height,width,w,pieces_x,pieces_y, w,w);
+    hit=collideRectRect(0,height,width,w,tetrad[0].x,tetrad[0].y, 30,30);
     if(hit){
       var temp = new Tetrad(xpos,ypos);
-      buildup.push(pieces_x,pieces_y);
-      pieces_x.splice(0,4);
-      pieces_y.splice(0,4);
-      
-      for(var i=0; i<pieces_x.length; i+=2){
-        pieces_x.push(temp);
-      }
+      buildup.push(tetrad[0]);
+      tetrad.splice(0,1);
+      tetrad.push(temp);
     }
-    
   }
   
   this.render=function(){
@@ -101,19 +94,13 @@ function Tetrad(x,y){
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW ) {
-    for(var i=0; i<pieces.length; i+=2){
-      pieces[i]+=w;
-    }
+    tetrad[0].x+=30;
   } else if (keyCode === LEFT_ARROW) {
-    for(var i=0; i<pieces.length; i+=2){
-      pieces[i]-=w;
-    }
+    tetrad[0].x-=30;
   } else if (keyCode === DOWN_ARROW) {
-    for(var i=1; i<pieces.length; i+=2){
-      pieces[i]+=w;
-    }
+    tetrad[0].y+=30;
   } else if (keyCode === 32) {
-    tetrad[1]=height-30;
+    tetrad[0].y=height-30;
   }
 }
 
@@ -141,6 +128,4 @@ function draw() {
   
   fill('red');
   rect(0,660,300,30);
-  
-//  console.log(buildup[0]);
 }
