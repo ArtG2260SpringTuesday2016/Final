@@ -45,10 +45,15 @@ var TextBox = function(title) {
   
   this.createAndPositionInput = function(xPos, yPos) {
     this.box.position(xPos, yPos);
-    this.box.input(validateNumberInput);
+    this.box.input(validateNumberInputOnManualChange);
   }
   
-  validateNumberInput = function() {
+  this.fillNumber = function(rectangle) {
+    this.box.value(rectangle.day);
+  }
+  
+  // on input change validation function - internal to the class
+  validateNumberInputOnManualChange = function() {
    // check the values in the text boxes
     if (this.value() === "") {
       error = "";
@@ -68,6 +73,30 @@ var TextBox = function(title) {
       error = "";
       text(error, 250, 595);
       this.isValid = true;
+    }
+  }
+  
+  // validation function that can be accessed by class objects
+  this.validateNumberInput = function() {
+   // check the values in the text boxes
+    if (this.box.value() === "") {
+      error = "";
+      text(error, 250, 595);
+      this.box.isValid = false;
+    }
+    // check that it is a valid number 
+    else if (isNaN(this.box.value()) || this.box.value() < 1 || this.box.value() > 31) {
+      console.log("invalid");
+      error = "Please only enter numbers between 1-31.";
+      text(error, 250, 595);
+      this.box.isValid = false;
+    }
+    else {
+      // Valid
+      console.log("valid");
+      error = "";
+      text(error, 250, 595);
+      this.box.isValid = true;
     }
   }
 }
@@ -161,4 +190,32 @@ function draw(){
   
   text(dataValueText + "  inches", 500, 500);
   
+}
+
+
+function mouseClicked() {
+  for (var i = 0; i < dataArrLength; i++) {
+    var rect = dataArr[i];
+    
+    // check if we have clicked in a rectangle
+    if (collidePointRect(mouseX, mouseY, rect.xCoord, rect.yCoord, rect.width, rect.height)) {
+      
+      // fill text box with clicked rectangle index
+      // fill box 1 if it is not filled with a valid number
+      if (!input1.box.isValid) {
+        input1.fillNumber(rect);
+        input1.validateNumberInput();
+      } 
+      // otherwise if box two is not valid, fill it
+      else if (!input2.box.isValid) {
+        input2.fillNumber(rect);
+        input2.validateNumberInput();
+      }
+      // otherwise just fill box 1
+      else {
+        input1.fillNumber(rect);
+        input1.validateNumberInput();
+      }
+    }
+  }
 }
