@@ -8,91 +8,49 @@ var w = 30;
 var xpos = 120;
 var ypos = 0;
 
-// UNIT FUNCTION
-
-function unit (x,y){
-  strokeWeight(1.2)
-  stroke('black');
-  rect(x,y,30,30);
-}
-
-// 7 BLOCK TYPES
-
-function block(x,y,type){
-  x2=x+w;
-  y2=y+w;
-  x3=x-w;
-  y3=y-w;
-  x4=x+w+w;
-
-  if(type=="O"){
-    fill('yellow');
-    unit(x,y);
-    unit(x2,y);
-    unit(x,y2);
-    unit(x2,y2);
-  }
-  
-  else if(type=="T"){
-    fill('purple');
-    unit(x,y);
-    unit(x2,y);
-    unit(x3,y);
-    unit(x,y3);
-  }
-  
-  else if(type=="J"){
-    fill('blue');
-    unit(x,y);
-    unit(x,y3);
-    unit(x,y2);
-    unit(x2,y3);
-  }
-  
-  else if(type=="L"){
-    fill('orange');
-    unit(x,y);
-    unit(x,y3);
-    unit(x,y2);
-    unit(x2,y2);
-  }
-  
-  else if(type=="Z"){
-    fill('red');
-    unit(x,y);
-    unit(x2,y);
-    unit(x,y3);
-    unit(x3,y3);
-  }
-  
-  else if(type=="S"){
-    fill('green');
-    unit(x,y);
-    unit(x2,y);
-    unit(x,y2);
-    unit(x3,y2);
-  }
-  
-  else if(type=="I"){
-    fill('#89f');
-    unit(x,y);
-    unit(x3,y);
-    unit(x2,y);
-    unit(x4,y);
-  }
-}
-
 // TETRAD CLASS
   
 function Tetrad(x,y,type){
   this.x=x;
   this.y=y;
   
+  var pieces = [];
+  
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
+  
+  this.generate=function(){
+    pieces.push(this.x,this.y);
+    if(letters[index] === "O"){
+      fill('yellow');
+      pieces.push(this.x+w,this.y,this.x,this.y+w,this.x+w,this.y+w);
+    } else if(letters[index] === "T"){
+      fill('purple');
+      pieces.push(this.x+w,this.y,this.x-w,this.y,this.x,this.y-w)
+    } else if(letters[index] === "J"){
+      fill('blue');
+      pieces.push(this.x,this.y-w,this.x,this.y+w,this.x+w,this.y-w);
+    } else if(letters[index] === "L"){
+      fill('orange');
+      pieces.push(this.x,this.y-w,this.x,this.y+w,this.x+w,this.y+w);
+    } else if(letters[index] === "Z"){
+      fill('red');
+      pieces.push(this.x+w,this.y,this.x,this.y-w,this.x-w,this.y-w);
+    } else if(letters[index] === "S"){
+      fill('green');
+      pieces.push(this.x+w,this.y,this.x,this.y+w,this.x-w,this.y+w);
+    } else if(letters[index] === "I"){
+      fill('#89f');
+      pieces.push(this.x-w,this.y,this.x+w,this.y,this.x+w+w,this.y);
+    }
+  }
       
   this.display=function(){
-    block(constrain(this.x,0,300),constrain(this.y,0,630),letters[index]);
+    strokeWeight(1.2);
+    stroke('black');
+    for(var i=0; i<7; i+2){
+      rect(pieces[i],pieces[i+1],30,30);
+    }
   }
   
   this.move=function(){
@@ -117,6 +75,7 @@ function Tetrad(x,y,type){
   }
   
   this.render=function(){
+    this.generate();
     this.display();
     this.move();
     this.deactivate();
