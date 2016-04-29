@@ -14,7 +14,7 @@ var stateArea = [
  {"state":"Kansas", "area":81814.88},
  {"state":"Minnesota", "area":79610.08},
  {"state":"Nebraska", "area":76872.41},
- {"state":"South Dakota", "ar ea":75884.64},
+ {"state":"South Dakota", "area":75884.64},
  {"state":"North Dakota", "area":68975.93},
  {"state":"Missouri", "area":68885.93},
  {"state":"Oklahoma", "area":68667.06},
