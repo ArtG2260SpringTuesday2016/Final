@@ -168,14 +168,14 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     collideRectRect(0,630,width,w,pieces[3].x,pieces[3].y, 30,30);
 
     if(hit){
-      var temp = new Tetrad(unit_0,unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
       buildup.push(tetrad[0]);
-      //console.log("tetrad" + tetrad[0]);
-      //console.log("build" + buildup[0]);
       tetrad.splice(0,1);
       pieces.splice(0,4);
-      tetrad.push(temp);
-      //console.log("temp" + temp);
+      
+      var temp1 = new Tetrad({"x":xpos, "y":ypos},unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
+      tetrad.push(temp1);
+      console.log(temp1);
+      console.log(unit_0);
     }
   }
   
