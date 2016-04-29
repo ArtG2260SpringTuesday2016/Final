@@ -30,7 +30,7 @@ var getYear = "";
 var Property = function (xposn, yposn, sizeY){
  this.x = xposn;
  this.y = yposn;
- this.width = 3;
+ this.width = width / 20;
  this.height = sizeY;
  
  this.renderProperty = function(col) {
@@ -109,45 +109,48 @@ var convert = function(ar) {
 //omitting any that appear as "Not Available"
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(1200, 750);
   background(200, 255, 255);
 
   
  years(data);
  Old = convert(Old);
  New = convert(New);
-console.log(Old.sort(sortYear));
+
   var OldAvg = sum(getEnergy(Old)) / Old.length;
   var NewAvg = sum(getEnergy(New)) / New.length;
+  console.log(OldAvg)
+  console.log(NewAvg)
   stroke(30, 0 ,30);
   var resize = 300000
   textSize(25);
   fill(200, 0, 150);
   strokeWeight(3);
   
+  
   var makeEnergy = function(avg, size, xposn, yposn) {
-   rect(width/xposn, yposn - (avg / size), width / 4, avg / size)
+   rect(width/xposn, yposn - (avg / size), width / 8, avg / size)
   }
   
-  var oldenergy = makeEnergy(OldAvg, resize, 1.75, 500);
+  var oldenergy = makeEnergy(OldAvg, resize, 1.75, 625);
   oldenergy;
   
   fill(100, 30, 250)
   strokeWeight(2);
-  var newenergy = makeEnergy(NewAvg, resize, 5, 500);
+  var newenergy = makeEnergy(NewAvg, resize, 1.4, 625);
   newenergy;
 
   fill("Blue");
   stroke("Black")
   strokeWeight(0)
-  text(round(OldAvg), width / 1.65, height * .9);
-  text(round(NewAvg), width / 4.5, height * .9);
+  text(round(OldAvg), width / 1.7, height * .9);
+  text(round(NewAvg), width / 1.35, height * .9);
   
   textSize(50);
   fill("White")
   strokeWeight(5);
   stroke("black");
-  text("Average Energy Use", width / 7, height / 6);
+  text("Average Energy Use", width / 3.5, height / 8);
   
   fill("Black")
   rect(0, height * .835, width, 0);
