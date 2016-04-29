@@ -83,49 +83,99 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
       rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
       rect(tetrad[0].unit3.x,tetrad[0].unit3.y,w,w);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,0,0);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "T"){
       fill('purple');
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
       rect(tetrad[0].unit4.x,tetrad[0].unit4.y,w,w);
       rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,0,0);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "J"){
       fill('blue');
       rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
       rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
       rect(tetrad[0].unit7.x,tetrad[0].unit7.y,w,w);
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,0,0);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit5.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "L"){
       fill('orange');
       rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
       rect(tetrad[0].unit3.x,tetrad[0].unit3.y,w,w);
       rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,0,0);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "Z"){
       fill('red');
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
       rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
       rect(tetrad[0].unit6.x,tetrad[0].unit6.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,0,0);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
+
     } else if(letters[index] === "S"){
       fill('green');
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
       rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
       rect(tetrad[0].unit8.x,tetrad[0].unit8.y,w,w);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,0,0);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "I"){
       fill('#89f');
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
       rect(tetrad[0].unit4.x,tetrad[0].unit4.y,w,w);
       rect(tetrad[0].unit9.x,tetrad[0].unit9.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,0,0);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,0,0);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
     }
     rect(tetrad[0].unit0.x,tetrad[0].unit0.y,w,w);
   }
 
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
-    for(var i=0; i<4; i++)
-      hit=collideRectRect(0,height-w,width,w,pieces[i].x,pieces[i].y, 30,30);
+    hit=collideRectRect(0,630,width,w,pieces[0].x,pieces[0].y, 30,30) ||
+    collideRectRect(0,630,width,w,pieces[1].x,pieces[1].y, 30,30) ||
+    collideRectRect(0,630,width,w,pieces[2].x,pieces[2].y, 30,30) ||
+    collideRectRect(0,630,width,w,pieces[3].x,pieces[3].y, 30,30);
+
     if(hit){
       var temp = new Tetrad(unit_0,unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
-//      buildup.push(tetrad[0]);
+      buildup.push(tetrad[0]);
+      //console.log("tetrad" + tetrad[0]);
+      //console.log("build" + buildup[0]);
       tetrad.splice(0,1);
+      pieces.splice(0,4);
       tetrad.push(temp);
+      //console.log("temp" + temp);
     }
   }
   
@@ -207,7 +257,7 @@ function draw() {
   }
   
   for (var i=0; i<buildup.length; i++){
-    buildup[i].render();
+    buildup[i].display();
   }
   
   fill('red');
