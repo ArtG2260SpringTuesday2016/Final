@@ -8,30 +8,30 @@ var w = 30;
 var xpos = 120;
 var ypos = 0;
 
+var unit_0 = {"x":xpos, "y":ypos};
+var unit_1 = {"x":xpos+w, "y":ypos};
+var unit_2 = {"x":xpos, "y":ypos+w};
+var unit_3 = {"x":xpos+w, "y":ypos+w};
+var unit_4 = {"x":xpos-w, "y":ypos};
+var unit_5 = {"x":xpos, "y":ypos-w};
+var unit_6 = {"x":xpos-w, "y":ypos-w}; 
+var unit_7 = {"x":xpos+w, "y":ypos-w};
+var unit_8 = {"x":xpos-w, "y":ypos+w};
+var unit_9 = {"x":xpos+w+w, "y":ypos};
+
 // TETRAD CLASS
   
-function Tetrad(xpos0,ypos0,xpos1,ypos1,xpos2,ypos2,xpos3,ypos3){
-  this.xpos0=xpos0; //x,y
-  this.ypos0=ypos0;
-  
-  this.xpos1=xpos1; //x+,y+
-  this.ypos1=ypos1;
-  
-  this.xpos2=xpos2; //x-,x-
-  this.ypos2=ypos2;
-
-  this.xpos3=xpos3; //x++
-  
-  var unit1 = {"x":this.xpos1, "y":this.ypos0};
-  var unit2 = {"x":this.xpos0, "y":this.ypos1};
-  var unit3 = {"x":this.xpos1, "y":this.ypos1};
-  var unit4 = {"x":this.xpos2, "y":this.ypos0};
-  var unit5 = {"x":this.xpos0, "y":this.ypos2};
-  var unit6 = {"x":this.xpos2, "y":this.ypos2}; 
-  var unit7 = {"x":this.xpos1, "y":this.ypos2};
-  var unit8 = {"x":this.xpos2, "y":this.ypos1};
-  var unit9 = {"x":this.xpos3, "y":this.ypos0};
-  var unit0 = {"x":this.xpos0, "y":this.ypos0};
+function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
+  this.unit0=unit0;
+  this.unit1=unit1;
+  this.unit2=unit2;
+  this.unit3=unit3;
+  this.unit4=unit4;
+  this.unit5=unit5;
+  this.unit6=unit6;
+  this.unit7=unit7;
+  this.unit8=unit8;
+  this.unit9=unit9;
 
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
@@ -64,13 +64,17 @@ function Tetrad(xpos0,ypos0,xpos1,ypos1,xpos2,ypos2,xpos3,ypos3){
   }
       
   this.move=function(){
-    console.log(pieces[0]);
-    console.log(tetrad[0]);
     if (keyIsPressed === false && pieces[0].y<630 && pieces[1].y<630 && pieces[2].y<630 && pieces[3].y<630){   // moving in ticks
-      tetrad[0].ypos0+=w;
-      tetrad[0].ypos1+=w;
-      tetrad[0].ypos2+=w;
-      tetrad[0].ypos3+=w;
+      tetrad[0].unit0.y+=w;
+      tetrad[0].unit1.y+=w;
+      tetrad[0].unit2.y+=w;
+      tetrad[0].unit3.y+=w;
+      tetrad[0].unit4.y+=w;
+      tetrad[0].unit5.y+=w;
+      tetrad[0].unit6.y+=w;
+      tetrad[0].unit7.y+=w;
+      tetrad[0].unit8.y+=w;
+      tetrad[0].unit9.y+=w;
       frameRate(1.5);
     } else if (keyIsDown(DOWN_ARROW)){  // smooth movement
       frameRate(30);
@@ -80,11 +84,8 @@ function Tetrad(xpos0,ypos0,xpos1,ypos1,xpos2,ypos2,xpos3,ypos3){
   this.display=function(){
     strokeWeight(1.2);
     stroke('black');
-    for(var i=0; i<pieces.length; i++){
-      rect(tetrad[0].xpos0,tetrad[0].ypos0,w,w);
-      rect(tetrad[0].xpos1,tetrad[0].ypos1,w,w);
-      rect(tetrad[0].xpos2,tetrad[0].ypos2,w,w);
-      rect(tetrad[0].xpos3,tetrad[0].ypos3,w,w);
+    for(var i=0; i<4; i++){
+      rect(pieces[i].x,pieces[i].y,w,w);
     }
   }
 
@@ -94,8 +95,8 @@ function Tetrad(xpos0,ypos0,xpos1,ypos1,xpos2,ypos2,xpos3,ypos3){
     if(hit){
       var temp = new Tetrad(xpos,ypos,xpos+w,ypos+w,xpos-w,ypos-w,xpos+w+w)
       buildup.push(pieces[0],pieces[1],pieces[2],pieces[3]);
-      pieces.splice(0,4);
-      pieces.push(temp);
+      tetrad.splice(0,10);
+      tetrad.push(temp);
     }
   }
   
@@ -110,14 +111,16 @@ function Tetrad(xpos0,ypos0,xpos1,ypos1,xpos2,ypos2,xpos3,ypos3){
 // KEY PRESSES
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW && tetrad[0].xpos3<200) {
-    tetrad[0].xpos3+=30;
-  } else if (keyCode === LEFT_ARROW) {
-    pieces[i].x-=30;
-  } else if (keyCode === DOWN_ARROW) {
-    pieces[i].y+=30;
-  } else if (keyCode === 32) {
-    pieces[i].y=height-w-pieces[i].y;
+  for (var i=0; i<4; i++){
+    if (keyCode === RIGHT_ARROW) {
+      pieces[i].x+=w;
+    } else if (keyCode === LEFT_ARROW) {
+      pieces[i].x-=w;
+    } else if (keyCode === DOWN_ARROW) {
+      pieces[i].y+=w;
+    } else if (keyCode === 32) {
+      pieces[i].y+=height-w-w-(pieces[i].y);
+    }
   }
 }
 
@@ -128,7 +131,7 @@ function setup(){
   createCanvas(300,690);
   
   // PUSHING NEW TETRADS TO ARRAY
-  var temp = new Tetrad(xpos,ypos,xpos+w,ypos+w,xpos-w,ypos-w,xpos+w+w,null);
+  var temp = new Tetrad(unit_0,unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
   tetrad.push(temp);
 }
 
@@ -145,4 +148,5 @@ function draw() {
   
   fill('red');
   rect(0,660,300,30);
+  console.log(pieces);
 }
