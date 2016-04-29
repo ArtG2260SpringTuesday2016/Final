@@ -7,32 +7,23 @@ var moon = {
   x: 200,
   y: 100
 };
-
-
+var barWidth = 13
 
 var graph = function (someData) {
   for (var i = 0; i < someData.length; i++){
-    var barWidth = 13
     var spacing = i * (5 + barWidth);
     var barHeight = someData[i].interest;
-
-//    rect(spacing, 250, barWidth, barHeight * 2)
     rect(spacing, 250, barWidth, barHeight * -2)
   }
 }
 
 var graph2 = function (someOtherData) {
   for (var i = 0; i < someOtherData.length; i++){
-    var barWidth2 = 13
-    var spacing2 = i * (5 + barWidth2);
+    var spacing2 = i * (5 + barWidth);
     var barHeight2 = someOtherData[i].interest2;
-
-    rect(spacing2, 250, barWidth2, barHeight2 * 2)
-    //rect(spacing2, 250, barWidth2, barHeight2 * -2)
+    rect(spacing2, 250, barWidth, barHeight2 * 2)
   }
 }
-
-
 
 function setup() {
   createCanvas(1000, 500)
@@ -41,9 +32,6 @@ function setup() {
 // Drawing Random Stars
   for (var i = 0; i < 100; i++){
     stars[i] = new Star();
-  }
-  for (var i = 0; i < stars.length; i++){
-    stars[i].move();
     stars[i].display();
   }
 
@@ -54,12 +42,8 @@ function Star(){
       noStroke()
       fill(255)
       ellipse(this.x, this.y, 5, 5);
-      }
-      this.move = function(){
-        this.x = this.x + random (0, 0);
-        this.y = this.y + random (0, 0);
-      }
-    }
+    };
+  }
 
 // Adding Moon
   noStroke()
@@ -81,7 +65,6 @@ function Star(){
   fill(34,148,143) // Blue for Histogram
   graph(myData);
 
-
 // Adding Text to Corners
   fill(255)
   rect(600,50,330,30), // Rectangle Behind Text
@@ -91,7 +74,6 @@ function Star(){
   rect(590,80,350,30), // Rectangle Behind Text
   fill(255),
   text("From January 4 to January 30 2016", 603, 102)
-
   fill(255)
   rect(605,400,350,30), // Rectangle Behind Text
   textSize(20)
@@ -105,7 +87,7 @@ function Star(){
   function mouseMoved() {
     for(i = 0; i < myData.length; i++) {
       var spd = myData[i];
-      var barWidth = 13
+      var barWidth = 13;
       var spacing = i * (5 + barWidth);
     if (abs((spacing + (barWidth / 2)) - mouseX) < (barWidth / 2) && spd.date != "filler" && mouseY < 250) {
       fill(0)
@@ -125,9 +107,9 @@ function Star(){
 
 for(i = 0; i < myData2.length; i++) {
       var spd2 = myData2[i];
-      var barWidth2 = 13
-      var spacing2 = i * (5 + barWidth2);
-    if (abs((spacing2 + (barWidth2 / 2)) - mouseX) < (barWidth2 / 2) && spd2.date2 != "filler2" && mouseY > 250) {
+      var barWidth = 13
+      var spacing2 = i * (5 + barWidth);
+    if (abs((spacing2 + (barWidth / 2)) - mouseX) < (barWidth / 2) && spd2.date2 != "filler2" && mouseY > 250) {
       fill(0)
       rect(0, 175, width, 60)
       rect(0, 260, width, 60)
@@ -138,9 +120,8 @@ for(i = 0; i < myData2.length; i++) {
       graph2(myData2);
       fill(255)
       textSize(15)
-      text(spd2.date2,spacing2 + (barWidth2 / 2),280)
-      text("Interest Level: " + spd2.interest2, spacing2 + (barWidth2 / 2), 300)
+      text(spd2.date2,spacing2 + (barWidth / 2),280)
+      text("Interest Level: " + spd2.interest2, spacing2 + (barWidth / 2), 300)
       }
     }
-
   }
