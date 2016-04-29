@@ -28,14 +28,13 @@ var getHeight = "Hover over each rectangle to show the energy usage for that yea
 var getYear = "";
 
 var Property = function (xposn, yposn, sizeY){
- this.x = xposn;
  this.y = yposn;
  this.width = width / 20;
  this.height = sizeY;
  
- this.renderProperty = function(col) {
-  fill(col);
-  rect(this.x, this.y, this.width, this.height)
+ this.renderProperty = function(x) {
+  fill("Black");
+  rect(x, this.y, this.width, this.height)
  }
  this.showSize = function(x) {
   if (collidePointRect(mouseX, mouseY, x, height - this.height)) {
@@ -43,7 +42,8 @@ var Property = function (xposn, yposn, sizeY){
   }
  }
  this.render = function (iterator) {
-  
+  this.RenderProperty(iterator)
+  this.showSize(iterator)
  }
  
 
@@ -116,11 +116,13 @@ function setup() {
  years(data);
  Old = convert(Old);
  New = convert(New);
+ Old.sort(sortYear);
+ New.sort(sortYear);
+ console.log(Old);
 
   var OldAvg = sum(getEnergy(Old)) / Old.length;
   var NewAvg = sum(getEnergy(New)) / New.length;
-  console.log(OldAvg)
-  console.log(NewAvg)
+  
   stroke(30, 0 ,30);
   var resize = 200000
   textSize(25);
@@ -150,15 +152,35 @@ function setup() {
   fill("White")
   strokeWeight(5);
   stroke("black");
-  text("Average Energy Use", width / 3.5, height / 8);
+  text("Average Energy Use", width / 1.75, height / 8);
   
   fill("Black")
   rect(0, height * .835, width, 0);
   rect(0, height * .15, width, 0);
   rect(width / 2, height * .15, 0, height * .68);
+  rect(0, height / 2, width/2, 0);
+  
  
    //Compare old:energy to new:energy; two functions; one with all old energies,
   //one with all new energies
-  
+ 
+}
 
+function draw() {
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ fill("Purple")
+ textSize(35)
+ text()
 }
