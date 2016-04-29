@@ -35,7 +35,7 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
 
   var letters = [ "O", "T", "J", "L", "Z", "S", "I"];
   var index = floor(random(letters.length));
-  
+
   this.generate=function(){
     pieces.push(unit0);
     
@@ -62,9 +62,10 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
       pieces.push(unit1,unit4,unit9);
     }
   }
-      
+
+
   this.move=function(){
-    if (keyIsPressed === false && pieces[0].y<630 && pieces[1].y<630 && pieces[2].y<630 && pieces[3].y<630){   // moving in ticks
+    if (keyIsPressed === false && tetrad[0].unit5.y<630){   // moving in ticks
       tetrad[0].unit0.y+=w;
       tetrad[0].unit1.y+=w;
       tetrad[0].unit2.y+=w;
@@ -84,16 +85,51 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
   this.display=function(){
     strokeWeight(1.2);
     stroke('black');
-    for(var i=0; i<4; i++){
-      rect(pieces[i].x,pieces[i].y,w,w);
+    
+    if(letters[index] === "O"){
+      fill('yellow');
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,w,w);
+    } else if(letters[index] === "T"){
+      fill('purple');
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,w,w);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+    } else if(letters[index] === "J"){
+      fill('blue');
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+      rect(tetrad[0].unit7.x,tetrad[0].unit7.y,w,w);
+    } else if(letters[index] === "L"){
+      fill('orange');
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,w,w);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+    } else if(letters[index] === "Z"){
+      fill('red');
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
+      rect(tetrad[0].unit6.x,tetrad[0].unit6.y,w,w);
+    } else if(letters[index] === "S"){
+      fill('green');
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,w,w);
+    } else if(letters[index] === "I"){
+      fill('#89f');
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,w,w);
+      rect(tetrad[0].unit9.x,tetrad[0].unit9.y,w,w);
     }
+    rect(tetrad[0].unit0.x,tetrad[0].unit0.y,w,w);
   }
 
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
     hit=collideRectRect(0,height,width,w,tetrad[0].x,tetrad[0].y, 30,30);
     if(hit){
-      var temp = new Tetrad(xpos,ypos,xpos+w,ypos+w,xpos-w,ypos-w,xpos+w+w)
+      var temp = new Tetrad(unit_0,unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9)
       buildup.push(pieces[0],pieces[1],pieces[2],pieces[3]);
       tetrad.splice(0,10);
       tetrad.push(temp);
@@ -101,7 +137,6 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
   }
   
   this.render=function(){
-    this.generate();
     this.move();
     this.display();
     this.deactivate();
@@ -111,16 +146,51 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
 // KEY PRESSES
 
 function keyPressed() {
-  for (var i=0; i<4; i++){
-    if (keyCode === RIGHT_ARROW) {
-      pieces[i].x+=w;
-    } else if (keyCode === LEFT_ARROW) {
-      pieces[i].x-=w;
-    } else if (keyCode === DOWN_ARROW) {
-      pieces[i].y+=w;
-    } else if (keyCode === 32) {
-      pieces[i].y+=height-w-w-(pieces[i].y);
-    }
+  
+  if (keyCode === RIGHT_ARROW && tetrad[0].unit9.x<300){
+    tetrad[0].unit0.x+=w
+    tetrad[0].unit1.x+=w
+    tetrad[0].unit2.x+=w
+    tetrad[0].unit3.x+=w
+    tetrad[0].unit4.x+=w
+    tetrad[0].unit5.x+=w
+    tetrad[0].unit6.x+=w
+    tetrad[0].unit7.x+=w
+    tetrad[0].unit8.x+=w
+    tetrad[0].unit9.x+=w
+  } else if (keyCode === LEFT_ARROW && tetrad[0].unit4.x>0){
+    tetrad[0].unit0.x-=w
+    tetrad[0].unit1.x-=w
+    tetrad[0].unit2.x-=w
+    tetrad[0].unit3.x-=w
+    tetrad[0].unit4.x-=w
+    tetrad[0].unit5.x-=w
+    tetrad[0].unit6.x-=w
+    tetrad[0].unit7.x-=w
+    tetrad[0].unit8.x-=w
+    tetrad[0].unit9.x-=w
+  } else if (keyCode === DOWN_ARROW && tetrad[0].unit5.y<630){
+    tetrad[0].unit0.y+=w
+    tetrad[0].unit1.y+=w
+    tetrad[0].unit2.y+=w
+    tetrad[0].unit3.y+=w
+    tetrad[0].unit4.y+=w
+    tetrad[0].unit5.y+=w
+    tetrad[0].unit6.y+=w
+    tetrad[0].unit7.y+=w
+    tetrad[0].unit8.y+=w
+    tetrad[0].unit9.y+=w
+  } else if (keyCode === 32 && tetrad[0].unit5.y<630){
+    tetrad[0].unit0.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit1.y+=630-tetrad[0].unit1.y;
+    tetrad[0].unit2.y+=630-tetrad[0].unit2.y;
+    tetrad[0].unit3.y+=630-tetrad[0].unit3.y;
+    tetrad[0].unit4.y+=630-tetrad[0].unit4.y;
+    tetrad[0].unit5.y+=630-tetrad[0].unit5.y;
+    tetrad[0].unit6.y+=630-tetrad[0].unit6.y;
+    tetrad[0].unit7.y+=630-tetrad[0].unit7.y;
+    tetrad[0].unit8.y+=630-tetrad[0].unit8.y;
+    tetrad[0].unit9.y+=630-tetrad[0].unit9.y;
   }
 }
 
@@ -148,5 +218,4 @@ function draw() {
   
   fill('red');
   rect(0,660,300,30);
-  console.log(pieces);
 }
