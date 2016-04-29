@@ -79,18 +79,10 @@ var sum = function(ar) {
   return total;
 }
 
-//This function takes in an array of Site_Energy_Use
-//and converts it into an array of numbers
-//omitting any that appear as "Not Available"
-
-function setup() {
-  createCanvas(600, 600);
-  background(200, 255, 255);
-
-  var convert = function(ar) {
+var convert = function(ar) {
     var newAr = [];
     for (i = 0; i < ar.length; i++) {
-      if (ar[i].Site_Energy_Use != "Not Available") {
+      if (ar[i].Site_Energy_Use != "Not Available" && ar[i].Year_Built !== null) {
         append(newAr, ar[i])
       }
     }
@@ -104,11 +96,27 @@ function setup() {
    }
    return newAr;
   }
+  
+  var sortYear = function(a, b) {
+   return a.Year_Built - b.Year_Built;
+   }
+  
 
+
+
+//This function takes in an array of Site_Energy_Use
+//and converts it into an array of numbers
+//omitting any that appear as "Not Available"
+
+function setup() {
+  createCanvas(600, 600);
+  background(200, 255, 255);
+
+  
  years(data);
  Old = convert(Old);
  New = convert(New);
-
+console.log(Old.sort(sortYear));
   var OldAvg = sum(getEnergy(Old)) / Old.length;
   var NewAvg = sum(getEnergy(New)) / New.length;
   stroke(30, 0 ,30);
