@@ -8,6 +8,8 @@ var w = 30;
 var xpos = 120;
 var ypos = 0;
 
+var score=0;
+
 var unit_0 = {"x":xpos, "y":ypos};
 var unit_1 = {"x":xpos+w, "y":ypos};
 var unit_2 = {"x":xpos, "y":ypos+w};
@@ -18,6 +20,13 @@ var unit_6 = {"x":xpos-w, "y":ypos-w};
 var unit_7 = {"x":xpos+w, "y":ypos-w};
 var unit_8 = {"x":xpos-w, "y":ypos+w};
 var unit_9 = {"x":xpos+w+w, "y":ypos};
+
+var headerFont, bodyFont;
+
+function preload() {
+  headerFont = loadFont("fonts/tetris.ttf");
+  bodyFont = loadFont("fonts/Avenir-Medium.ttf");
+}
 
 // TETRAD CLASS
   
@@ -133,7 +142,6 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
       rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
       rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
       rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
-
     } else if(letters[index] === "S"){
       fill('green');
       rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
@@ -265,6 +273,7 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
         tetrad.push(temp);
       }
       hit=false;
+      score+=10;
     }
   }
   
@@ -331,26 +340,44 @@ function keyPressed() {
 // SETUP + DRAW FUNCTION
 
 function setup(){
-  createCanvas(300,690);
+  createCanvas(550,660);
   
   // PUSHING NEW TETRADS TO ARRAY
   var temp = new Tetrad(unit_0,unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
   tetrad.push(temp);
+  
+  background('lightblue');
+
+  textSize(22);
+  fill('#44d');
+  textFont(bodyFont);
+  text("WELCOME TO",350,125,160,100);
+
+  textFont(headerFont);
+  text("Welcome T",350,175,100,100);
+  
+  textSize(18);
+  textFont(bodyFont);
+  text("press the arrows or space bar to play the game!",350,325,160,100);
+  
+  
 }
 
 function draw() {
-  background(20,20,20);
-
-  for (var i=0; i<tetrad.length; i++)
-  {
-    tetrad[i].render();
-  }
+  fill(20,20,20);
+  rect(0,0,300,660);
   
+  tetrad[0].render();
   for (var i=0; i<buildup.length; i++){
-    buildup[i].display();
     buildup[i].display_buildup();
   }
   
   fill('red');
-  rect(0,660,300,30);
+  rect(0,630,300,30);
+  
+  fill('white');
+  rect(350,425,140,40);
+  noStroke();
+  fill("black");
+  text(("score: " + score),360,425,160,100);
 }
