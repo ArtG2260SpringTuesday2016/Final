@@ -1,1 +1,1 @@
-Edit this with your description of your final project.
+My final is an animated short, the bottom right changes colors on its own, the numbers around the cursor rotate upon mouse click, and the top green wiggly moves on hovering to the left side and moves upon clicking left of it. 
