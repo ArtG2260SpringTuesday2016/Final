@@ -117,16 +117,15 @@ var avgYear = function(arYear, arEnergy) {
  var newAr = [];
  var arAvg = [];
  for (var i = 0; i < (arYear.length - 1); i++) {
-  console.log(i);
   append(newAr, arEnergy[i])
-  if (arYear[i] !== arYear[i+1]) {
+  if (arYear[i] !== arYear[i + 1]) {
    append(arAvg, [arYear[i], round(sum(newAr) / newAr.length)])
    newAr = [];
   }
  }
  append(newAr, arEnergy[arYear.length - 1])
  append(arAvg, [arYear[i], round(sum(newAr) / newAr.length)])
- console.log(arAvg.length)
+
  return arAvg;
 }
 
@@ -152,10 +151,8 @@ function setup() {
  OldEnergy = getEnergy(Old);
  NewYears = getYear(New);
  NewEnergy = getEnergy(New);
- console.log(OldYears);
- console.log(OldEnergy);
- //console.log(avgYear(OldYears, OldEnergy));
- 
+
+
 
 
  var OldAvg = sum(getEnergy(Old)) / Old.length;
@@ -205,21 +202,36 @@ function setup() {
 }
 
 function draw() {
+ var resize = 6000000
+ var graph = function(ar, h) {
+  for (var i = 0; i < ar.length; i++)
+   rect(i * 6.4, h - (ar[i][1] / resize), width / 250, ar[i][1] / resize)
+ }
+ convert(Old);
+ convert(New);
+ Old.sort(sortYear);
+ New.sort(sortYear);
+
+ OldYears = getYear(Old);
+ OldEnergy = getEnergy(Old);
+ NewYears = getYear(New);
+ NewEnergy = getEnergy(New);
+ var OldAvg = avgYear(OldYears, OldEnergy);
+ var NewAvg = avgYear(NewYears, NewEnergy);
+
+strokeWeight(0);
+
+ fill(200, 0, 150);
+ graph(OldAvg, height / 1.203);
+
+ fill(100, 30, 250);
+ graph(NewAvg, height / 2.01);
 
 
 
 
-
-
-
-
-
-
-
-
-
- fill("Purple")
- strokeWeight(0)
- textSize(20)
+ fill("Purple");
+ strokeWeight(0);
+ textSize(20);
  text(getData, 0, height / 8);
 }
