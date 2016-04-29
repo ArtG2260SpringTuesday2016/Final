@@ -40,19 +40,19 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     pieces.push(unit0);
     
     if(letters[index] === "O"){
-      pieces.push(unit1,unit2,unit3);
+      pieces.push(this.unit1,this.unit2,this.unit3);
     } else if(letters[index] === "T"){
-      pieces.push(unit1,unit4,unit5);
+      pieces.push(this.unit1,this.unit4,this.unit5);
     } else if(letters[index] === "J"){
-      pieces.push(unit5,unit2,unit7);
+      pieces.push(this.unit5,this.unit2,this.unit7);
     } else if(letters[index] === "L"){
-      pieces.push(unit5,unit2,unit3);
+      pieces.push(this.unit5,this.unit2,this.unit3);
     } else if(letters[index] === "Z"){
-      pieces.push(unit1,unit5,unit6);
+      pieces.push(this.unit1,this.unit5,this.unit6);
     } else if(letters[index] === "S"){
-      pieces.push(unit1,unit2,unit8);
+      pieces.push(this.unit1,this.unit2,this.unit8);
     } else if(letters[index] === "I"){
-      pieces.push(unit1,unit4,unit9);
+      pieces.push(this.unit1,this.unit4,this.unit9);
     }
   }
 
@@ -162,20 +162,23 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
 
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
-    hit=collideRectRect(0,630,width,w,pieces[0].x,pieces[0].y, 30,30) ||
-    collideRectRect(0,630,width,w,pieces[1].x,pieces[1].y, 30,30) ||
-    collideRectRect(0,630,width,w,pieces[2].x,pieces[2].y, 30,30) ||
-    collideRectRect(0,630,width,w,pieces[3].x,pieces[3].y, 30,30);
+    hit=collideRectRect(0,630,width,w,pieces[0].x,pieces[0].y,w,w) ||
+    collideRectRect(0,630,width,w,pieces[1].x,pieces[1].y,w,w) ||
+    collideRectRect(0,630,width,w,pieces[2].x,pieces[2].y,w,w) ||
+    collideRectRect(0,630,width,w,pieces[3].x,pieces[3].y,w,w);
+    print("colliding?" + hit);
 
     if(hit){
       buildup.push(tetrad[0]);
       tetrad.splice(0,1);
       pieces.splice(0,4);
       
-      var temp1 = new Tetrad({"x":xpos, "y":ypos},unit_1,unit_2,unit_3,unit_4,unit_5,unit_6,unit_7,unit_8,unit_9);
+      var temp1 = new Tetrad({"x":xpos, "y":ypos},{"x":xpos+w, "y":ypos},{"x":xpos, "y":ypos+w},{"x":xpos+w, "y":ypos+w},{"x":xpos-w, "y":ypos},{"x":xpos, "y":ypos-w},{"x":xpos-w, "y":ypos-w},{"x":xpos+w, "y":ypos-w},{"x":xpos-w, "y":ypos+w},{"x":xpos+w+w, "y":ypos});
       tetrad.push(temp1);
       console.log(temp1);
-      console.log(unit_0);
+      hit=false;
+      
+      tetrad[0].generate()
     }
   }
   
@@ -183,7 +186,7 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     this.generate();
     this.move();
     this.display();
-    this.deactivate();
+//    this.deactivate();
   }
 }
 
@@ -225,16 +228,17 @@ function keyPressed() {
     tetrad[0].unit8.y+=w
     tetrad[0].unit9.y+=w
   } else if (keyCode === 32){ // need to avoid flipping
-    tetrad[0].unit0.y+=600-tetrad[0].unit0.y;
-    tetrad[0].unit1.y+=600-tetrad[0].unit1.y;
-    tetrad[0].unit2.y+=600-tetrad[0].unit2.y;
-    tetrad[0].unit3.y+=600-tetrad[0].unit3.y;
-    tetrad[0].unit4.y+=600-tetrad[0].unit4.y;
-    tetrad[0].unit5.y+=600-tetrad[0].unit5.y;
-    tetrad[0].unit6.y+=600-tetrad[0].unit6.y;
-    tetrad[0].unit7.y+=600-tetrad[0].unit7.y;
-    tetrad[0].unit8.y+=600-tetrad[0].unit8.y;
-    tetrad[0].unit9.y+=600-tetrad[0].unit9.y;
+    console.log(tetrad[0].unit0.y)
+    tetrad[0].unit1.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit2.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit3.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit4.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit5.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit6.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit7.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit8.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit9.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit0.y+=630-tetrad[0].unit0.y;
   }
 }
 
@@ -252,7 +256,8 @@ function setup(){
 function draw() {
   background(20,20,20);
 
-  for (var i=0; i<tetrad.length; i++){
+  for (var i=0; i<tetrad.length; i++)
+  {
     tetrad[i].render();
   }
   
