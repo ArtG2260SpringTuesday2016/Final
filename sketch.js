@@ -122,29 +122,29 @@ function setup() {
   console.log(OldAvg)
   console.log(NewAvg)
   stroke(30, 0 ,30);
-  var resize = 300000
+  var resize = 200000
   textSize(25);
   fill(200, 0, 150);
   strokeWeight(3);
   
   
   var makeEnergy = function(avg, size, xposn, yposn) {
-   rect(width/xposn, yposn - (avg / size), width / 8, avg / size)
+   rect(width/xposn, yposn - (avg / size), width / 5, avg / size)
   }
   
-  var oldenergy = makeEnergy(OldAvg, resize, 1.75, 625);
+  var oldenergy = makeEnergy(OldAvg, resize, 1.85, 625);
   oldenergy;
   
   fill(100, 30, 250)
   strokeWeight(2);
-  var newenergy = makeEnergy(NewAvg, resize, 1.4, 625);
+  var newenergy = makeEnergy(NewAvg, resize, 1.3, 625);
   newenergy;
 
   fill("Blue");
   stroke("Black")
   strokeWeight(0)
   text(round(OldAvg), width / 1.7, height * .9);
-  text(round(NewAvg), width / 1.35, height * .9);
+  text(round(NewAvg), width / 1.23, height * .9);
   
   textSize(50);
   fill("White")
@@ -154,6 +154,8 @@ function setup() {
   
   fill("Black")
   rect(0, height * .835, width, 0);
+  rect(0, height * .15, width, 0);
+  rect(width / 2, height * .15, 0, height * .68);
  
    //Compare old:energy to new:energy; two functions; one with all old energies,
   //one with all new energies
