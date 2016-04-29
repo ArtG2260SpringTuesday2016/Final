@@ -33,7 +33,7 @@ var Property = function (xposn, yposn, sizeY){
  this.width = 3;
  this.height = sizeY;
  
- this.renderGraph = function(col) {
+ this.renderProperty = function(col) {
   fill(col);
   rect(this.x, this.y, this.width, this.height)
  }
@@ -41,6 +41,9 @@ var Property = function (xposn, yposn, sizeY){
   if (collidePointRect(mouseX, mouseY, x, height - this.height)) {
    getHeight = this.height;
   }
+ }
+ this.render = function (iterator) {
+  
  }
  
 
@@ -61,9 +64,9 @@ var New = [];
 var years = function(ar) {
   for (i = 0; i < ar.length; i++) {
     if (ar[i].Year_Built < oldYear) {
-      append(Old, ar[i].Site_Energy_Use)
+      append(Old, ar[i])
     } else {
-      append(New, ar[i].Site_Energy_Use)
+      append(New, ar[i])
     }
   }
 }
@@ -87,29 +90,43 @@ function setup() {
   var convert = function(ar) {
     var newAr = [];
     for (i = 0; i < ar.length; i++) {
-      if (ar[i] != "Not Available") {
-        append(newAr, Number(ar[i].replace(/[*]| |,/g, "")))
+      if (ar[i].Site_Energy_Use != "Not Available") {
+        append(newAr, ar[i])
       }
     }
     return newAr;
   }
+  
+  var getEnergy = function(ar){
+   newAr = [];
+   for (i = 0; i < ar.length; i++) {
+    append(newAr, Number(ar[i].Site_Energy_Use.replace(/[*]| |,/g, "")))
+   }
+   return newAr;
+  }
 
-  years(data);
-  Old = convert(Old);
-  New = convert(New);
+ years(data);
+ Old = convert(Old);
+ New = convert(New);
 
-  var OldAvg = sum(Old) / Old.length;
-  var NewAvg = sum(New) / New.length;
-  var size = 300000
+  var OldAvg = sum(getEnergy(Old)) / Old.length;
+  var NewAvg = sum(getEnergy(New)) / New.length;
   stroke(30, 0 ,30);
+  var resize = 300000
   textSize(25);
   fill(200, 0, 150);
   strokeWeight(3);
-  var oldenergy = rect(width / 1.75, 800 - (OldAvg / size) - 300, width / 4, OldAvg / size);
+  
+  var makeEnergy = function(avg, size, xposn, yposn) {
+   rect(width/xposn, yposn - (avg / size), width / 4, avg / size)
+  }
+  
+  var oldenergy = makeEnergy(OldAvg, resize, 1.75, 500);
   oldenergy;
+  
   fill(100, 30, 250)
   strokeWeight(2);
-  var newenergy = rect(width / 5, 800 - (NewAvg / size) - 300, width / 4, NewAvg / size);
+  var newenergy = makeEnergy(NewAvg, resize, 5, 500);
   newenergy;
 
   fill("Blue");
@@ -129,6 +146,6 @@ function setup() {
  
    //Compare old:energy to new:energy; two functions; one with all old energies,
   //one with all new energies
-  console.log(Old);
+  
 
 }
