@@ -1,3 +1,11 @@
+var statePositions = [
+  {"xPos":25,"yPos":100},{"xPos":150,"yPos":100},{"xPos":275,"yPos":100},{"xPos":400,"yPos":100},{"xPos":525,"yPos":100},{"xPos":650,"yPos":100},{"xPos":775,"yPos":100},{"xPos":900,"yPos":100},{"xPos":1025,"yPos":100},{"xPos":1150,"yPos":100},
+  {"xPos":25,"yPos":150},{"xPos":150,"yPos":150},{"xPos":275,"yPos":150},{"xPos":400,"yPos":150},{"xPos":525,"yPos":150},{"xPos":650,"yPos":150},{"xPos":775,"yPos":150},{"xPos":900,"yPos":150},{"xPos":1025,"yPos":150},{"xPos":1150,"yPos":150},
+  {"xPos":25,"yPos":200},{"xPos":150,"yPos":200},{"xPos":275,"yPos":200},{"xPos":400,"yPos":200},{"xPos":525,"yPos":200},{"xPos":650,"yPos":200},{"xPos":775,"yPos":200},{"xPos":900,"yPos":200},{"xPos":1025,"yPos":200},{"xPos":1150,"yPos":200},
+  {"xPos":25,"yPos":250},{"xPos":150,"yPos":250},{"xPos":275,"yPos":250},{"xPos":400,"yPos":250},{"xPos":525,"yPos":250},{"xPos":650,"yPos":250},{"xPos":775,"yPos":250},{"xPos":900,"yPos":250},{"xPos":1025,"yPos":250},{"xPos":1150,"yPos":250},
+  {"xPos":25,"yPos":300},{"xPos":150,"yPos":300},{"xPos":275,"yPos":300},{"xPos":400,"yPos":300},{"xPos":525,"yPos":300},{"xPos":650,"yPos":300},{"xPos":775,"yPos":300},{"xPos":900,"yPos":300},{"xPos":1025,"yPos":300},{"xPos":1150,"yPos":300}
+  ]
+
 var pizzaData = [
   {"State":"Alabama",
    "PizzaHuts":174,
