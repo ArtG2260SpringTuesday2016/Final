@@ -188,6 +188,9 @@ function setup() {
  strokeWeight(5);
  stroke("black");
  text("Average Energy Use", width / 1.75, height / 8);
+ textSize(20);
+ text("1964 - 2014", 75, height - 35)
+ text("Before 1964", 75, height - 85)
 
  fill("Black")
  rect(0, height * .835, width, 0);
@@ -223,10 +226,11 @@ strokeWeight(0);
 
  fill(200, 0, 150);
  graph(OldAvg, height / 1.203);
+ rect(25, height - 100, 20, 20);
 
  fill(100, 30, 250);
  graph(NewAvg, height / 2.01);
-
+ rect(25, height - 50, 20, 20);
 
 
 
