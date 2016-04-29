@@ -42,7 +42,7 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     if(letters[index] === "O"){
       pieces.push(this.unit1,this.unit2,this.unit3);
     } else if(letters[index] === "T"){
-      pieces.push(this.unit1,this.unit4,this.unit5);
+      pieces.push(this.unit2,this.unit3,this.unit8);
     } else if(letters[index] === "J"){
       pieces.push(this.unit5,this.unit2,this.unit7);
     } else if(letters[index] === "L"){
@@ -91,14 +91,14 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
       rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "T"){
       fill('purple');
-      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,w,w);
-      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,w,w);
-      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,w,w);
-      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,0,0);
-      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,0,0);
+      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,w,w);
+      rect(tetrad[0].unit2.x,tetrad[0].unit2.y,w,w);
+      rect(tetrad[0].unit3.x,tetrad[0].unit3.y,w,w);
+      rect(tetrad[0].unit4.x,tetrad[0].unit4.y,0,0);
       rect(tetrad[0].unit6.x,tetrad[0].unit6.y,0,0);
+      rect(tetrad[0].unit1.x,tetrad[0].unit1.y,0,0);
+      rect(tetrad[0].unit5.x,tetrad[0].unit5.y,0,0);
       rect(tetrad[0].unit7.x,tetrad[0].unit7.y,0,0);
-      rect(tetrad[0].unit8.x,tetrad[0].unit8.y,0,0);
       rect(tetrad[0].unit9.x,tetrad[0].unit9.y,0,0);
     } else if(letters[index] === "J"){
       fill('blue');
@@ -159,6 +159,92 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     }
     rect(tetrad[0].unit0.x,tetrad[0].unit0.y,w,w);
   }
+  
+    this.display_buildup=function(){
+    strokeWeight(1.2);
+    stroke('black');
+    
+    if(letters[index] === "O"){
+      fill('yellow');
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,w,w);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,w,w);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,w,w);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,0,0);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+    } else if(letters[index] === "T"){
+      fill('purple');
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,w,w);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,w,w);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,w,w);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,0,0);
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,0,0);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+    } else if(letters[index] === "J"){
+      fill('blue');
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,w,w);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,w,w);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,w,w);
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,0,0);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,0,0);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit5.y,0,0);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+    } else if(letters[index] === "L"){
+      fill('orange');
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,w,w);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,w,w);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,w,w);
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,0,0);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+    } else if(letters[index] === "Z"){
+      fill('red');
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,w,w);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,w,w);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,w,w);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,0,0);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,0,0);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+
+    } else if(letters[index] === "S"){
+      fill('green');
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,w,w);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,w,w);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,w,w);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,0,0);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,0,0);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,0,0);
+    } else if(letters[index] === "I"){
+      fill('#89f');
+      rect(buildup[0].unit1.x,buildup[0].unit1.y,w,w);
+      rect(buildup[0].unit4.x,buildup[0].unit4.y,w,w);
+      rect(buildup[0].unit9.x,buildup[0].unit9.y,w,w);
+      rect(buildup[0].unit2.x,buildup[0].unit2.y,0,0);
+      rect(buildup[0].unit3.x,buildup[0].unit3.y,0,0);
+      rect(buildup[0].unit5.x,buildup[0].unit5.y,0,0);
+      rect(buildup[0].unit6.x,buildup[0].unit6.y,0,0);
+      rect(buildup[0].unit7.x,buildup[0].unit7.y,0,0);
+      rect(buildup[0].unit8.x,buildup[0].unit8.y,0,0);
+    }
+    rect(buildup[0].unit0.x,buildup[0].unit0.y,w,w);
+  }
 
   // detet collisions of tetrads, then store in new array)
   this.deactivate=function(){
@@ -166,19 +252,19 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     collideRectRect(0,630,width,w,pieces[1].x,pieces[1].y,w,w) ||
     collideRectRect(0,630,width,w,pieces[2].x,pieces[2].y,w,w) ||
     collideRectRect(0,630,width,w,pieces[3].x,pieces[3].y,w,w);
-    print("colliding?" + hit);
 
     if(hit){
       buildup.push(tetrad[0]);
+      console.log(pieces.length);
       tetrad.splice(0,1);
-      pieces.splice(0,4);
+      pieces.splice(0,pieces.length);
       
-      var temp1 = new Tetrad({"x":xpos, "y":ypos},{"x":xpos+w, "y":ypos},{"x":xpos, "y":ypos+w},{"x":xpos+w, "y":ypos+w},{"x":xpos-w, "y":ypos},{"x":xpos, "y":ypos-w},{"x":xpos-w, "y":ypos-w},{"x":xpos+w, "y":ypos-w},{"x":xpos-w, "y":ypos+w},{"x":xpos+w+w, "y":ypos});
-      tetrad.push(temp1);
-      console.log(temp1);
+      //problem with unit_0 variables here...
+      var temp = new Tetrad({"x":xpos, "y":ypos},{"x":xpos+w, "y":ypos},{"x":xpos, "y":ypos+w},{"x":xpos+w, "y":ypos+w},{"x":xpos-w, "y":ypos},{"x":xpos, "y":ypos-w},{"x":xpos-w, "y":ypos-w},{"x":xpos+w, "y":ypos-w},{"x":xpos-w, "y":ypos+w},{"x":xpos+w+w, "y":ypos});
+      if(tetrad.length<1){
+        tetrad.push(temp);
+      }
       hit=false;
-      
-      tetrad[0].generate()
     }
   }
   
@@ -186,7 +272,7 @@ function Tetrad(unit0,unit1,unit2,unit3,unit4,unit5,unit6,unit7,unit8,unit9){
     this.generate();
     this.move();
     this.display();
-//    this.deactivate();
+    this.deactivate();
   }
 }
 
@@ -228,17 +314,16 @@ function keyPressed() {
     tetrad[0].unit8.y+=w
     tetrad[0].unit9.y+=w
   } else if (keyCode === 32){ // need to avoid flipping
-    console.log(tetrad[0].unit0.y)
-    tetrad[0].unit1.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit2.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit3.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit4.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit5.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit6.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit7.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit8.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit9.y+=630-tetrad[0].unit0.y;
-    tetrad[0].unit0.y+=630-tetrad[0].unit0.y;
+    tetrad[0].unit1.y=600;
+    tetrad[0].unit2.y=630;
+    tetrad[0].unit3.y=630;
+    tetrad[0].unit4.y=600;
+    tetrad[0].unit5.y=570;
+    tetrad[0].unit6.y=570;
+    tetrad[0].unit7.y=570;
+    tetrad[0].unit8.y=630;
+    tetrad[0].unit9.y=600;
+    tetrad[0].unit0.y=600;
   }
 }
 
@@ -263,6 +348,7 @@ function draw() {
   
   for (var i=0; i<buildup.length; i++){
     buildup[i].display();
+    buildup[i].display_buildup();
   }
   
   fill('red');
