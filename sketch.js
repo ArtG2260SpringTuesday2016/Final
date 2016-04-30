@@ -8,8 +8,12 @@ var sum = function(ar) {
 };
 
 var sortYear = function(a, b) {
-  return a.Year - b.Year;
- };
+ return a.Year - b.Year;
+};
+
+var newPlacement = 0;
+var size1 = 50000000
+var size2 = 30000000
 
 
 var oldAvg = 0;
@@ -34,22 +38,26 @@ var Property = function(aData) {
 
  this.renderRect = function(x) {
   if (this.age === "Old") {
-   rect(x, 50, width / 500, this.Energy / 300000);
+   fill(200, 0, 150);
+   rect(x, 373 - this.Energy / size1, width / 500, this.Energy / size1);
   } else {
-   rect(x, 100, width / 500, this.Energy / 300000);
-  }
- };
- 
- this.renderLargeRect = function(x, x2) {
-   if (this.age === "Old") {
-   rect(x, 0, width / 8, this.Energy / 200000);
-  } else {
-   rect(x2, 0, width / 8, this.Energy / 200000);
+   fill(100, 30, 250);
+   rect(x, 625 - this.Energy / size1, width / 500, this.Energy / size1);
   }
  };
 
- this.isMouseOnRect = function(x, y) {
-  if (collidePointRect(mouseX, mouseY, x, y, this.Energy / 300000)) {
+ this.renderLargeRect = function() {
+  if (this.age === "Old") {
+   fill(200, 0, 150);
+   rect(width / 1.75, 625 - this.Energy / size2, width / 8, this.Energy / size2);
+  } else {
+   fill(100, 30, 250);
+   rect(width / 1.35, 625 - this.Energy / size2, width / 8, this.Energy / size2);
+  }
+ };
+
+ this.isMouseOnRect = function(x) {
+  if (collidePointRect(mouseX, mouseY, x, 625 - this.Energy / size1, this.Energy / size1)) {
    dataText = "Energy Use: " + this.Energy
    dataText2 = "Year Built: " + this.Year
   }
@@ -77,13 +85,10 @@ var Property = function(aData) {
   return arAvg;
  };
 
- this.fullConvert = function(ar) {
-  avgYear(getYear(convert(ar).sort(sortYear)), getEnergy(convert(ar).sort(sortYear)))
- };
-
- this.render = function(x, y, s) {
-  this.renderRect(x, y);
-  this.isMouseOnRect(x, y);
+ this.render = function(x) {
+  this.renderRect(x);
+  this.isMouseOnRect(x);
+  this.renderLargeRect()
  };
 }
 
@@ -98,8 +103,8 @@ function setup() {
  stroke("black");
  text("Average Energy Use", width / 1.75, height / 8);
  textSize(20);
- text("1964 - 2014", 75, height - 35)
- text("Before 1964", 75, height - 85)
+ text(oldYear + " - " + currentYear, 75, height - 35)
+ text("Before " + oldYear, 75, height - 85)
  fill("Black")
  rect(0, height * .835, width, 0);
  rect(0, height * .15, width, 0);
@@ -125,12 +130,24 @@ function setup() {
 
 function draw() {
  strokeWeight(0);
-
-
-
  fill("Purple");
  strokeWeight(0);
  textSize(20);
  text(dataText, 0, height / 10);
  text(dataText2, 0, height / 7.5);
+
+ for (var i = 0; i < data.length; i++) {
+  if (properties[i].age === "Old")
+   properties[i].render(i * .778);
+  else {
+   newPlacement++
+   properties[i].render(newPlacement * .778);
+  }
+ }
+
+
+
+
+
+
 }
