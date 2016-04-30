@@ -1,76 +1,64 @@
+//Creates the sum of all members of an array of numbers
+var sum = function(ar) {
+ var total = 0;
+ for (var i = 0; i < ar.length; i++) {
+  total += ar[i];
+ }
+ return total;
+};
+
+var sortYear = function(a, b) {
+  return a.Year - b.Year;
+ };
+
+
 var oldAvg = 0;
 var newAvg = 0;
 var properties = [];
-var Old = [];
-var New = [];
 var currentYear = 2014;
 var age = 50;
 var oldYear = currentYear - age;
 var dataText = "Hover over a rectangle to see the Year Built and "
 var dataText2 = "Average Energy Usage of buildings constructed in that year"
 
-var Property = function(localWidth, localHeight) {
- this.Year = this.Year_Built;
- this.Energy = this.Site_Energy_Use;
+var Property = function(aData) {
+ this.Year = aData.Year_Built;
+ var siteEnergyUse = aData.Site_Energy_Use;
+ this.Energy = Number(siteEnergyUse.replace(/[*]| |,/g, ""))
 
+ if (this.Year < oldYear) {
+  this.age = "Old";
+ } else {
+  this.age = "New"
+ }
 
- this.renderRect = function(x, y, w, s) {
-  rect(x, y, w, this.Energy / s);
+ this.renderRect = function(x) {
+  if (this.age === "Old") {
+   rect(x, 50, width / 500, this.Energy / 300000);
+  } else {
+   rect(x, 100, width / 500, this.Energy / 300000);
+  }
+ };
+ 
+ this.renderLargeRect = function(x, x2) {
+   if (this.age === "Old") {
+   rect(x, 0, width / 8, this.Energy / 200000);
+  } else {
+   rect(x2, 0, width / 8, this.Energy / 200000);
+  }
  };
 
  this.isMouseOnRect = function(x, y) {
-  if (collidePointRect(mouseX, mouseY, x, y, this.height)) {
-   dataText = "Energy Use" + this.Energy
-   dataText2 = "Year Built" + this.Year
+  if (collidePointRect(mouseX, mouseY, x, y, this.Energy / 300000)) {
+   dataText = "Energy Use: " + this.Energy
+   dataText2 = "Year Built: " + this.Year
   }
  };
 
- this.arrangeYear = function(ar) {
-  for (var i = 0; i < ar.length; i++) {
-   if (ar[i].Year < oldYear) {
-    append(Old, ar[i])
-   } else {
-    append(New, ar[i])
-   }
-  }
- };
 
- this.sum = function(ar) {
-  var total = 0;
-  for (var i = 0; i < ar.length; i++) {
-   total += ar[i];
-  }
-  return total;
- };
 
- this.convert = function(ar) {
-  var newAr = [];
-  for (var i = 0; i < ar.length; i++) {
-   if (ar[i].Energy != "Not Available" && ar[i].Year !== null) {
-    append(newAr, ar[i])
-   }
-  }
-  return newAr;
- };
-
- this.getEnergy = function(ar) {
-  var newAr = [];
-  for (var i = 0; i < ar.length; i++) {
-   append(newAr, Number(ar[i].Energy.replace(/[*]| |,/g, "")))
-  }
-  return newAr;
- };
-
- this.getYear = function(ar) {
-  var newAr = [];
-  for (i = 0; i < ar.length; i++) {
-   append(newAr, ar[i].Year)
-  }
-  return newAr;
- };
-
- this.sortYear = function(a, b) {
-  return a.Year - b.Year;
+ this.realData = function() {
+  return (this.Energy != "Not Available" && this.Year !== null);
  };
 
  this.avgYear = function(arYear, arEnergy) {
@@ -97,8 +85,9 @@ var Property = function(localWidth, localHeight) {
   this.renderRect(x, y);
   this.isMouseOnRect(x, y);
  };
-
 }
+
+
 
 function setup() {
  createCanvas(1200, 750);
@@ -116,12 +105,15 @@ function setup() {
  rect(0, height * .15, width, 0);
  rect(width / 2, height * .15, 0, height * .68);
  rect(0, height / 2, width / 2, 0);
- 
- for (var i = 0; i < data.length; i++){
-  
-  oldAvg.push(this.fullConvert(Old));
-  newAvg.push(this.fullConvert(New));
+
+ for (var i = 0; i < data.length; i++) {
+  var newProp = new Property(data[i]);
+  if (newProp.realData()) {
+   properties.push(newProp)
+  }
+  properties.sort(sortYear);
  }
+
 
 
  strokeWeight(0);
