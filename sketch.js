@@ -11,7 +11,6 @@ var sortYear = function(a, b) {
  return a.Year - b.Year;
 };
 
-var newPlacement = 0;
 var size1 = 50000000
 var size2 = 30000000
 
@@ -56,8 +55,8 @@ var Property = function(aData) {
   }
  };
 
- this.isMouseOnRect = function(x) {
-  if (collidePointRect(mouseX, mouseY, x, 625 - this.Energy / size1, this.Energy / size1)) {
+ this.isMouseOnRect = function() {
+  if (collidePointRect(mouseX, mouseY, 500, 500, 500)) {
    dataText = "Energy Use: " + this.Energy
    dataText2 = "Year Built: " + this.Year
   }
@@ -87,7 +86,7 @@ var Property = function(aData) {
 
  this.render = function(x) {
   this.renderRect(x);
-  this.isMouseOnRect(x);
+  this.isMouseOnRect();
   this.renderLargeRect()
  };
 }
@@ -120,34 +119,38 @@ function setup() {
  }
 
 
-
  strokeWeight(0);
  fill(200, 0, 150);
  rect(25, height - 100, 20, 20);
  fill(100, 30, 250);
  rect(25, height - 50, 20, 20);
+ 
 }
 
 function draw() {
  strokeWeight(0);
- fill("Purple");
+ 
+var rendering = function() {
+ var newPlacement = 0;
+ for (var i = 0; i < properties.length; i++) {
+  if (properties[i].age === "Old"){
+   properties[i].render(i * .777);
+  }
+  else {
+   newPlacement++
+   properties[i].render(newPlacement * .777);
+  }
+ }
+}
+rendering();
+
+
+
+
+fill("Purple");
  strokeWeight(0);
  textSize(20);
  text(dataText, 0, height / 10);
  text(dataText2, 0, height / 7.5);
-
- for (var i = 0; i < data.length; i++) {
-  if (properties[i].age === "Old")
-   properties[i].render(i * .778);
-  else {
-   newPlacement++
-   properties[i].render(newPlacement * .778);
-  }
- }
-
-
-
-
-
 
 }
